@@ -1,0 +1,63 @@
+<div class="filter-list-view-toolbar" layout="row" layout-align="space-between center" flex>
+  <div layout="row" layout-align="space-between end" flex>
+    <form name="form" class="md-inline-form" novalidate flex>
+
+      <div layout="column" layout-gt-sm="row" layout-align="space-between start" flex>
+        <div layout="column" layout-gt-sm="row" layout-align="start start" flex>
+
+          <md-input-container class="md-icon-float">
+            <label>ID</label>
+            <input ng-model="vm.filterForm.id" type="text">
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Nombre</label>
+            <input ng-model="vm.filterForm.name" type="text">
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>ACTIVO</label>
+            <md-select ng-model="vm.filterForm.active" style="min-width: 128px">
+              <md-option ng-value="-1">
+                <b>TODOS</b>
+              </md-option>
+              <md-option ng-value="1">
+                <b>SI</b>
+              </md-option>
+              <md-option ng-value="0">
+                <b>NO</b>
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>RESULTADOS</label>
+            <md-select ng-model="vm.filterForm.per_page" style="min-width: 128px">
+              <md-option ng-value="25">
+                25
+              </md-option>
+              <md-option ng-value="50">
+                50
+              </md-option>
+              <md-option ng-value="100">
+                100
+              </md-option>
+              <md-option ng-value="0">
+                <b>TODOS</b>
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+        </div>
+
+        <md-dialog-actions>
+          <md-button type="submit" ng-click="vm.searchClick()" class="send-button md-raised" aria-label="BUSCAR">
+            BUSCAR
+          </md-button>
+        </md-dialog-actions>
+
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+md-dialog {
+
+  &.close-period-dialog {
+    max-width: 600px;
+    width: 500px;
+
+    md-toolbar {
+      min-height: 50px;
+      max-height: 50px;
+
+      .title {
+        font-size: 20px;
+        padding-top: 12px;
+      }
+
+      .md-toolbar-tools-top {
+        height: 30px;
+        min-height: 30px;
+      }
+
+    }
+
+    md-dialog-content {
+      display: block;
+      position: relative;
+
+      .birthday-input {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 32px 0;
+
+        .md-button {
+          margin: 0 16px 0 0;
+          padding: 0;
+          width: 24px;
+          height: 24px;
+
+          md-icon {
+            color: rgba(0, 0, 0, 0.87);
+          }
+
+        }
+
+        .md-datepicker-input-container {
+          display: flex;
+          flex: 1;
+        }
+
+      }
+
+      .textarea-wrapper {
+
+        md-icon {
+          color: rgba(0, 0, 0, 0.87);
+          margin: 0 8px 0 0;
+        }
+
+        textarea {
+          min-height: 150px;
+        }
+
+      }
+    }
+
+    md-dialog-actions {
+      position: relative;
+      overflow-y: hidden;
+      overflow-x: auto;
+      justify-content: space-between;
+      background-color: rgba(0, 0, 0, 0.03);
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+  }
+}

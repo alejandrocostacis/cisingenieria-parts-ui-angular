@@ -1,0 +1,16 @@
+<div class="item" md-ink-ripple ng-repeat="item in vm.items" ng-click="vm.openItem(item)" ng-class="{'current-item': vm.currentItem === item}">
+
+    <div layout="row" layout-align="start center">
+
+        <div class="info" flex layout="column">
+            <div class="name" layout="row" layout-align="start center">
+                <img class="avatar" alt="{{item.name}}" ng-src="assets/images/config_avatar.png"/>
+                <span class="text-truncate">{{item.name}}</span>
+            </div>
+            <div class="message text-truncate">
+              {{item.description}}
+            </div>
+        </div>
+
+    </div>
+</div>

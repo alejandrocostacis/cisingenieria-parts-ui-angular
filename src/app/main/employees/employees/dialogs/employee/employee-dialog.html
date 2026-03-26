@@ -1,0 +1,165 @@
+<md-dialog class="employee-dialog" aria-label="dialog">
+
+  <form name="vm.form" class="md-inline-form" novalidate>
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar layout="column" ng-class="{'md-accent': vm.item.user.active, 'md-warn': !vm.item.user.active}">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title"><md-icon md-font-icon="icon-worker" class="icon" style="margin-right: 12px; padding-bottom: 28px"></md-icon>Empleado</span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <md-dialog-content ms-scroll>
+      <md-input-container class="md-icon-float md-block">
+        <label>Email</label>
+        <input name="email" ng-model="vm.item.user.email" ng-change="vm.resetForm()" type="email" md-maxlength="64">
+        <div ng-messages="vm.form.email.$error" role="alert">
+          <div ng-message="email">{{vm.form.email.$error.email}}</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Tipo</label>
+        <md-select required="true" ng-model="vm.item.user.role">
+          <md-option ng-value="'UserEmployee'">
+            Empleado
+          </md-option>
+          <md-option ng-value="'UserProjectLeader'">
+            Líder de Proyecto
+          </md-option>
+          <md-option ng-value="'UserAdministrativeAssistant'">
+            Auxiliar de Administración
+          </md-option>
+          <md-option ng-value="'UserHumanResourceManager'">
+            Recursos Humanos
+          </md-option>
+          <md-option ng-value="'UserAreaChief'">
+            Jefe de Área
+          </md-option>
+          <md-option ng-value="'UserCoordinator'">
+            Coordinador
+          </md-option>
+          <md-option ng-value="'UserAuxiliaryCoordinator'">
+            Coordinador Auxiliar
+          </md-option>
+          <md-option ng-value="'UserManager'">
+            Gerente
+          </md-option>
+          <md-option ng-value="'UserAdmin'">
+            Admin
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Nombre</label>
+          <input ng-model="vm.item.name" type="text" required md-maxlength="64">
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Apellido</label>
+          <input ng-model="vm.item.lastname" type="text" required md-maxlength="64">
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Abreviatura</label>
+          <input ng-model="vm.item.acronym" name="employee.acronym" type="text" ng-change="vm.resetForm()" md-maxlength="8">
+          <div ng-messages="vm.form['employee.acronym'].$error" role="alert">
+            <div ng-message="employee.acronym">{{vm.form['employee.acronym'].$error['employee.acronym']}}</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Legajo</label>
+          <input ng-model="vm.item.personnel_file" name="employee.personnel_file" type="text" ng-change="vm.resetForm()" required md-maxlength="64">
+          <div ng-messages="vm.form['employee.personnel_file'].$error" role="alert">
+            <div ng-message="employee.personnel_file">{{vm.form['employee.personnel_file'].$error['employee.personnel_file']}}</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Cuil</label>
+          <input ng-model="vm.item.cuil" name="employee.cuil" type="text" ng-change="vm.resetForm()" md-maxlength="14">
+          <div ng-messages="vm.form['employee.cuil'].$error" role="alert">
+            <div ng-message="employee.cuil">{{vm.form['employee.cuil'].$error['employee.cuil']}}</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Full Time</label>
+          <input ng-model="vm.item.fulltime" type="text" md-maxlength="8">
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Puesto</label>
+          <md-select required="true" ng-model="vm.item.employee_category.employee_position.id" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !employeePosition.active}" ng-repeat="employeePosition in vm.employeePositions" ng-value="employeePosition.id">
+              {{employeePosition.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Categoria</label>
+          <md-select required="true" ng-model="vm.item.employee_category.id"  ng-disabled="vm.item.employee_position.id == 0" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !employeeCategory.active}" ng-repeat="employeeCategory in vm.employeeCategories" ng-value="employeeCategory.id">
+              {{employeeCategory.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Area</label>
+          <md-select required="true" ng-model="vm.item.employee_area.id" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !employeeArea.active}" ng-repeat="employeeArea in vm.employeeAreas" ng-value="employeeArea.id">
+              {{employeeArea.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Tipo de hora</label>
+          <md-select required="true" ng-model="vm.item.employee_hour_type.id" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !employeeHourType.active}" ng-repeat="employeeHourType in vm.employeeHourTypes" ng-value="employeeHourType.id">
+              {{employeeHourType.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center" style="height: 12px">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.save()" class="send-button md-raised" ng-class="{'md-accent': vm.item.user.active, 'md-warn': !vm.item.user.active}" ng-disabled="vm.form.$invalid || vm.form.$pristine" aria-label="SAVE">
+          GUARDAR
+        </md-button>
+      </div>
+      <div layout="row" layout-align="start center">
+        <md-input-container class="md-icon-float md-block">
+          <md-tooltip ng-if="!vm.item.user.active"><span>Activar</span></md-tooltip>
+          <md-tooltip ng-if="vm.item.user.active"><span>Desactivar</span></md-tooltip>
+          <md-switch ng-model="vm.item.user.active" aria-label="set active"></md-switch>
+        </md-input-container>
+        <md-button ng-if="!vm.new" class="md-icon-button md-warn" aria-label="delete" ng-click="vm.remove()">
+          <md-icon md-font-icon="icon-delete"></md-icon>
+          <md-tooltip><span>Eliminar definitivamente</span></md-tooltip>
+        </md-button>
+      </div>
+    </md-dialog-actions>
+  </form>
+
+</md-dialog>

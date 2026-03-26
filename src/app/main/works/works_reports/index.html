@@ -1,0 +1,36 @@
+<div class="item-header" layout="row" layout-align="space-between center">
+  <h3>Reportes de Obras</h3>
+</div>
+
+<div class="item-content">
+  <div class="simple-table-container md-whiteframe-2dp">
+    <table class="simple" ms-responsive-table>
+      <tbody>
+        <tr ng-repeat="item in vm.items" class="grey-100-bg">
+          <td width="80px">
+            <md-icon md-font-icon="icon-attachment green-400-fg"></md-icon>
+            {{ item.size }}
+          </td>
+          <td>
+            <div class="tag" layout="row" layout-align="start center" style="background: none;">
+              <a ng-href="{{item.file.url}}" class="tag-label">{{ item.name }}</a>
+            </div>
+          </td>
+          <td ng-if="item.employee">
+            <div class="tag" layout="row" layout-align="start center">
+              <div class="tag-label">
+                {{ item.employee.acronym }} - {{ item.employee.lastname }}, {{ item.employee.name }}
+              </div>
+            </div>
+          </td>
+          <td>
+            <md-button class="md-icon-button md-warn" aria-label="delete" ng-click="vm.remove(item)">
+              <md-icon md-font-icon="icon-delete"></md-icon>
+              <md-tooltip><span>Eliminar definitivamente</span></md-tooltip>
+            </md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

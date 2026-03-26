@@ -1,0 +1,35 @@
+<div id="login" class="flex-scrollable" layout="column" ms-scroll>
+  <div id="login-form-wrapper" layout="column" layout-align="center center">
+    <div id="login-form" class="md-whiteframe-8dp">
+      <img src="assets/logos/logocis-original.png" style="max-width: 65%">
+      <form name="loginForm" novalidate ng-submit="vm.login()">
+
+        <md-input-container class="md-block" md-no-float>
+          <input type="text" name="email" ng-model="vm.form.email" placeholder="Usuario" ng-pattern="/^.+$/" required>
+          <div ng-messages="loginForm.email.$error" role="alert" multiple>
+            <div ng-message="required">
+              <span>El usuario es un campo requerido</span>
+            </div>
+            <div ng-message="pattern">
+              <span>Introduzca un usuario válido</span>
+            </div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" md-no-float>
+          <input type="password" name="password" ng-model="vm.form.password" placeholder="Contraseña" required>
+          <div ng-messages="loginForm.password.$error" role="alert">
+            <div ng-message="required">
+              <span>La contraseña es un campo requerido</span>
+            </div>
+          </div>
+        </md-input-container>
+
+        <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN" ng-disabled="loginForm.$invalid">
+          INGRESAR
+        </md-button>
+
+      </form>
+    </div>
+  </div>
+</div>

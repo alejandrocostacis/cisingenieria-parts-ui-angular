@@ -1,0 +1,90 @@
+<div class="widget-group" layout="row" flex layout-wrap>
+  <ms-widget layout="row" flex="100">
+    <ms-widget-front class="white-bg">
+      <table class="dataTable row-border hover" datatable="ng"
+        dt-instance="vm.dailyRepDTInstanceCallback" dt-options="vm.dailyReportsDtOptions">
+        <thead>
+          <tr>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Fecha</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Periodo</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Minutos</span>
+              </div>
+            </th>
+            <th class="secondary-text"
+              ng-if="['UserAdmin', 'UserAreaChief', 'UserCoordinator', 'UserManager'].includes(vm.role)">
+              <div class="table-header">
+                <span class="column-title">Costo</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Area</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Especialidad</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Actividad</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Lugar</span>
+              </div>
+            </th>
+            <th class="secondary-text">
+              <div class="table-header">
+                <span class="column-title">Empleado</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="dailyReport in vm.currentItem.daily_reports">
+            <td>{{ dailyReport.date | date: 'dd-MM-yyyy'}}</td>
+            <td>{{vm.getMonthName(dailyReport.period_month)}} {{dailyReport.period_year}}</td>
+            <td>{{dailyReport.minutes}}</td>
+            <td ng-if="['UserAdmin', 'UserAreaChief', 'UserCoordinator', 'UserManager'].includes(vm.role) && dailyReport.cost">
+              {{dailyReport.cost.cost * (dailyReport.minutes/60) | number: 2}}
+            </td>
+            <td ng-if="['UserAdmin', 'UserAreaChief', 'UserCoordinator', 'UserManager'].includes(vm.role) && !dailyReport.cost">-</td>
+            <td>{{dailyReport.speciality.employee_area.name}}</td>
+            <td>{{dailyReport.speciality.name}}</td>
+            <td>{{dailyReport.activity.name}}</td>
+            <td>{{dailyReport.place.name}}</td>
+            <td>{{dailyReport.employee.acronym}}</td>
+          </tr>
+        </tbody>
+        <tfoot class='daily-tfoot'>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Total: {{vm.dailyReportSumMinutes / 60 | number: 2}} hs.</th>
+              <th ng-if="['UserAdmin', 'UserAreaChief', 'UserCoordinator', 'UserManager'].includes(vm.role)">
+                Total: $ {{vm.dailyReportSumCost | number: 2}}
+              </th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+        </tfoot>  
+      </table>
+    </ms-widget-front>
+  </ms-widget>
+</div>

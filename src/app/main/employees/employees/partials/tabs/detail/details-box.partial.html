@@ -1,0 +1,148 @@
+
+<ms-widget layout="column" flex="100" flex-gt-sm="100">
+
+  <ms-widget-front class="white-bg">
+
+    <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+      <div class="h3"><div class="title" ><md-icon md-font-icon="icon-tooltip-text" class="icon" style="margin-right: 12px"></md-icon>Detalles</div></div>
+      <div class="pv-16">
+        <md-button ng-if="['UserAdmin','UserHumanResourceManager'].includes(vm.role) && !vm.currentItem.user.first_sign_in" class="md-icon-button" aria-label="update item">
+          <md-tooltip>Este empleado usa contraseña por defecto</md-tooltip>
+          <md-icon class="blue-100-fg" md-font-icon="icon-lock-outline"></md-icon>
+        </md-button>
+        <md-button ng-if="['UserAdmin','UserHumanResourceManager'].includes(vm.role) && vm.currentItem.user.first_sign_in" class="md-icon-button" ng-click="vm.resetPassword($event, vm.currentItem)" aria-label="update item">
+          <md-tooltip>Restaurar contraseña</md-tooltip>
+          <md-icon md-font-icon="icon-lock-outline"></md-icon>
+        </md-button>
+        <md-button ng-if="['UserAdmin','UserHumanResourceManager'].includes(vm.role)" class="md-icon-button" ng-click="vm.openItemDialog($event, vm.currentItem)" aria-label="update item">
+          <md-icon md-font-icon="icon-border-color"></md-icon>
+        </md-button>
+      </div>
+    </div>
+
+    <div class="p-16">
+      <md-list>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Tipo</b></h4>
+            <span class="md-subhead">{{vm.currentItem.user.role_nice_name}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Activo</b></h4>
+            <span class="md-subhead">{{vm.currentItem.user.active? 'SI' : 'NO'}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Nombre</b></h4>
+            <span class="md-subhead">{{vm.currentItem.name}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Apellido</b></h4>
+            <span class="md-subhead">{{vm.currentItem.lastname}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Email</b></h4>
+            <span class="md-subhead">{{vm.currentItem.user.email}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Abreviacion</b></h4>
+            <span class="md-subhead">{{vm.currentItem.acronym}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Legajo</b></h4>
+            <span class="md-subhead">{{vm.currentItem.personnel_file}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Fulltime</b></h4>
+            <span class="md-subhead">{{vm.currentItem.fulltime}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Area</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.employee_area.active}">
+              {{vm.currentItem.employee_area.name}}
+              <span ng-if="!vm.currentItem.employee_area.active">
+                <md-tooltip md-direction="bottom">
+                  El area se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Tipo de hora</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.employee_hour_type.active}">
+              {{vm.currentItem.employee_hour_type.name}}
+              <span ng-if="!vm.currentItem.employee_hour_type.active">
+                <md-tooltip md-direction="bottom">
+                  El tipo de hora se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Puesto</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.employee_category.employee_position.active}">
+              {{vm.currentItem.employee_category.employee_position.name}}
+              <span ng-if="!vm.currentItem.employee_category.employee_position.active">
+                <md-tooltip md-direction="bottom">
+                  El puesto se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Categoria</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.employee_category.active}">
+              {{vm.currentItem.employee_category.name}}
+              <span ng-if="!vm.currentItem.employee_category.active">
+                <md-tooltip md-direction="bottom">
+                  La categoria se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+
+  </ms-widget-front>
+
+</ms-widget>
+
+

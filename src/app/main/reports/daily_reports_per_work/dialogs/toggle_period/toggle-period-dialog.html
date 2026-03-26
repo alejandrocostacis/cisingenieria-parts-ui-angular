@@ -1,0 +1,47 @@
+<md-dialog class="toggle-period-dialog" aria-label="dialog">
+
+  <form class="md-inline-form" name="vm.form" novalidate>
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar class="md-accent" ng-class="{'md-warn':!vm.open}" layout="column">
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title" ng-if='vm.open'>
+          <md-icon class="icon" md-font-icon="icon-lightbulb" style="margin-right: 12px; padding-bottom: 28px"></md-icon>
+          ¿Desea abrir el periodo {{vm.period.period_month}}/{{vm.period.period_year}}?
+        </span>
+        <span class="title" ng-if='!vm.open'>
+          <md-icon class="icon" md-font-icon="icon-lightbulb" style="margin-right: 12px; padding-bottom: 28px"></md-icon>
+          ¿Desea cerrar el periodo {{vm.period.period_month}}/{{vm.period.period_year}}?
+        </span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <md-dialog-content ms-scroll>
+      <strong ng-if='!vm.open'>
+        ATENCIÓN: El empleado no podrá modificar las horas ya cargadas en este periodo!
+        </br>
+      </strong>
+      Empleado: {{vm.employee.personnel_file}} - {{vm.employee.surname}}, {{vm.employee.name}}
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center" style="height: 12px">
+      <div layout="row" layout-align="end center">
+        <md-button class="md-accent send-button md-raised" ng-click="vm.save()" ng-if='vm.open' type="submit" aria-label="SAVE">
+          ABRIR PERIODO
+        </md-button>
+        <md-button class="md-accent send-button md-raised md-warn" ng-click="vm.save()" ng-if='!vm.open' type="submit" aria-label="SAVE">
+          CERRAR PERIODO
+        </md-button>
+        <md-button class="md-accent send-button md-raised md-primary" ng-click="vm.cancel()" aria-label="CANCEL">
+          CANCELAR
+        </md-button>
+      </div>
+    </md-dialog-actions>
+  </form>
+
+</md-dialog>

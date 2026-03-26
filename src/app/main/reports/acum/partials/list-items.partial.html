@@ -1,0 +1,214 @@
+<div class="content fullpage-datatable" layout="column" flex>
+
+  <table class="dataTable row-border" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+    <thead>
+      <tr>
+        <th>Cód</th>
+        <th>Obra</th>
+        <th>Cliente</th>
+        <th>Responsable</th>
+        <th ng-if="vm.selectedType == 1" class="green-800-fg">Acum</th>
+        <th ng-if="vm.selectedType == 2" class="blue-800-fg">Acum</th>
+        <th ng-if="vm.selectedType == 0" class="green-800-fg">Acum Pesos</th>
+        <th ng-if="vm.selectedType == 0" class="blue-800-fg">Acum Horas</th>
+        <th class="grey-100-bg grey-800-fg">Ene</th>
+        <th class="grey-100-bg grey-800-fg">Feb</th>
+        <th class="grey-100-bg grey-800-fg">Mar</th>
+        <th class="grey-100-bg grey-800-fg">Abr</th>
+        <th class="grey-100-bg grey-800-fg">May</th>
+        <th class="grey-100-bg grey-800-fg">Jun</th>
+        <th class="grey-100-bg grey-800-fg">Jul</th>
+        <th class="grey-100-bg grey-800-fg">Ago</th>
+        <th class="grey-100-bg grey-800-fg">Sep</th>
+        <th class="grey-100-bg grey-800-fg">Oct</th>
+        <th class="grey-100-bg grey-800-fg">Nov</th>
+        <th class="grey-100-bg grey-800-fg">Dic</th>
+        <th ng-if="vm.selectedType == 1" class="green-800-fg">Pesos</th>
+        <th ng-if="vm.selectedType == 2" class="blue-800-fg">Horas</th>
+        <th ng-if="vm.selectedType == 0" class="green-800-fg">Pesos</th>
+        <th ng-if="vm.selectedType == 0" class="blue-800-fg">Horas</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <!-- Total Obras + CIS Interno -->
+    <tr ng-repeat="total in [1]">
+      <td class="name grey-50-bg"></td>
+      <td class="name grey-50-bg"><b>Total</b></td>
+      <td class="name grey-50-bg"></td>
+      <td class="name grey-50-bg"></td>
+
+      <td ng-if="vm.selectedType == 1 || vm.selectedType == 0" class="name green-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 1}">
+          <b>{{vm.totals.acum_cost | number: 0}}</b>
+      </td>
+      <td ng-if="vm.selectedType == 2 || vm.selectedType == 0" class="name blue-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 2}">
+          <b>{{vm.totals.acum_minutes_parsed.hours}}<b>:</b>{{vm.totals.acum_minutes_parsed.minutes}}</b>
+      </td>
+
+      <!--when by money is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 1"
+          class="name grey-50-bg green-800-fg" ng-class="{'grey-500-fg': vm.totals.months[month].cost == 0}">
+        <b>{{vm.totals.months[month].cost | number: 0}}</b>
+      </td>
+
+      <!--when by hours is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 2"
+          class="name grey-50-bg blue-800-fg" ng-class="{'grey-500-fg': vm.totals.months[month].minutes == 0}">
+        {{vm.totals.months[month].minutes_parsed.hours}}<b>:</b>{{vm.totals.months[month].minutes_parsed.minutes}}
+      </td>
+
+      <!--when by money and hours is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 0"
+          class="name grey-50-bg">
+        <div layout="column" layout-align="space-beetwen center">
+          <span class="green-800-fg " ng-class="{'grey-500-fg': vm.totals.months[month].cost == 0}">
+            {{vm.totals.months[month].cost | number: 0}}
+          </span>
+          <span class="blue-800-fg" ng-class="{'grey-500-fg': vm.totals.months[month].minutes == 0}">
+            {{vm.totals.months[month].minutes_parsed.hours}}<b>:</b>{{vm.totals.months[month].minutes_parsed.minutes}}
+          </span>
+        </div>
+      </td>
+
+      <td ng-if="vm.selectedType == 1 || vm.selectedType == 0" class="name green-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 1}">
+        <b>{{vm.totals.cost | number: 0}}</b>
+      </td>
+      <td ng-if="vm.selectedType == 2 || vm.selectedType == 0" class="name blue-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 2}">
+        <b>{{vm.totals.minutes_parsed.hours}}<b>:</b>{{vm.totals.minutes_parsed.minutes}}</b> hs
+      </td>
+    </tr>
+    <!-- Total Obras -->
+    <tr ng-repeat="total in [1]">
+      <td class="name grey-50-bg"></td>
+      <td class="name grey-50-bg"><b>Total Obras</b></td>
+      <td class="name grey-50-bg"></td>
+      <td class="name grey-50-bg"></td>
+
+      <td ng-if="vm.selectedType == 1 || vm.selectedType == 0" class="name green-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 1}"><b>{{vm.total_works.acum_cost | number: 0}}</b></td>
+      <td ng-if="vm.selectedType == 2 || vm.selectedType == 0" class="name blue-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 2}"><b>{{vm.total_works.acum_minutes_parsed.hours}}<b>:</b>{{vm.total_works.acum_minutes_parsed.minutes}}</b>
+      </td>
+
+      <!--when by money is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 1"
+          class="name grey-50-bg green-800-fg" ng-class="{'grey-500-fg': vm.total_works.months[month].cost == 0}">
+        <b>{{vm.total_works.months[month].cost | number: 0}}</b>
+      </td>
+
+      <!--when by hours is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 2"
+          class="name grey-50-bg blue-800-fg" ng-class="{'grey-500-fg': vm.total_works.months[month].minutes == 0}">
+        {{vm.total_works.months[month].minutes_parsed.hours}}<b>:</b>{{vm.total_works.months[month].minutes_parsed.minutes}}
+      </td>
+
+      <!--when by money and hours is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 0"
+          class="name grey-50-bg">
+        <div layout="column" layout-align="space-beetwen center">
+          <span class="green-800-fg " ng-class="{'grey-500-fg': vm.total_works.months[month].cost == 0}">
+            {{vm.total_works.months[month].cost | number: 0}}
+          </span>
+          <span class="blue-800-fg" ng-class="{'grey-500-fg': vm.total_works.months[month].minutes == 0}">
+            {{vm.total_works.months[month].minutes_parsed.hours}}<b>:</b>{{vm.total_works.months[month].minutes_parsed.minutes}}
+          </span>
+        </div>
+      </td>
+
+      <td ng-if="vm.selectedType == 1 || vm.selectedType == 0" class="name green-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 1}"><b>{{vm.total_works.cost | number: 0}}</b></td>
+      <td ng-if="vm.selectedType == 2 || vm.selectedType == 0" class="name blue-800-fg"
+          ng-class="{'grey-50-bg': vm.selectedType == 0, 'grey-100-bg': vm.selectedType == 2}"><b>{{vm.total_works.minutes_parsed.hours}}<b>:</b>{{vm.total_works.minutes_parsed.minutes}}</b>
+        hs
+      </td>
+    </tr>
+
+    <tr>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg" ng-if="vm.selectedType == 0"></td>
+      <td class="grey-100-bg" ng-if="vm.selectedType == 0"></td>
+    </tr>
+    <tr ng-repeat="item in ::vm.items">
+      <td class="name">{{item.work_id}}</td>
+      <td class="name">{{item.work_name}}</td>
+      <td class="name">{{item.customer_name}}</td>
+      <td class="name">
+        <ul>
+          <li ng-repeat="employee in item.employees">
+            {{employee.employee_position | capitalize: true}}: {{employee.acronym}}
+          </li>
+        </ul>
+      </td>
+      <td ng-if="vm.selectedType == 1 || vm.selectedType == 0" class="name green-800-fg"
+          ng-class="{'green-50-bg': vm.selectedType == 0, 'green-100-bg': vm.selectedType == 1}"><b>{{item.acum_cost | number: 0}}</b></td>
+      <td ng-if="vm.selectedType == 2 || vm.selectedType == 0" class="name blue-800-fg"
+          ng-class="{'blue-50-bg': vm.selectedType == 0, 'blue-100-bg': vm.selectedType == 2}"><b>{{item.acum_minutes_parsed.hours}}<b>:</b>{{item.acum_minutes_parsed.minutes}}</b>
+        hs
+      </td>
+
+      <!--when by money is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 1"
+          class="name green-50-bg green-800-fg" ng-class="{'grey-500-fg': item.months[month].cost == 0}">
+        {{item.months[month].cost | number: 0}}
+      </td>
+
+      <!--when by hours is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 2"
+          class="name blue-50-bg blue-800-fg" ng-class="{'grey-500-fg': item.months[month].minutes == 0}">
+        {{item.months[month].minutes_parsed.hours}}<b>:</b>{{item.months[month].minutes_parsed.minutes}}
+      </td>
+
+      <!--when by money and hours is selected-->
+      <td ng-repeat="month in ::[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+          ng-if="vm.selectedType == 0"
+          class="name grey-50-bg">
+        <div layout="column" layout-align="space-beetwen center">
+          <span class="green-800-fg " ng-class="{'grey-500-fg': item.months[month].cost == 0}">
+            {{item.months[month].cost | number: 0}}
+          </span>
+          <span class="blue-800-fg" ng-class="{'grey-500-fg': item.months[month].minutes == 0}">
+            {{item.months[month].minutes_parsed.hours}}<b>:</b>{{item.months[month].minutes_parsed.minutes}}
+          </span>
+        </div>
+      </td>
+
+      <td ng-if="vm.selectedType == 1 || vm.selectedType == 0" class="name green-800-fg"
+          ng-class="{'green-50-bg': vm.selectedType == 0, 'green-100-bg': vm.selectedType == 1}"><b>{{item.cost | number: 0}}</b></td>
+      <td ng-if="vm.selectedType == 2 || vm.selectedType == 0" class="name blue-800-fg"
+          ng-class="{'blue-50-bg': vm.selectedType == 0, 'blue-100-bg': vm.selectedType == 2}"><b>{{item.minutes_parsed.hours}}<b>:</b>{{item.minutes_parsed.minutes}}</b>
+        hs
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

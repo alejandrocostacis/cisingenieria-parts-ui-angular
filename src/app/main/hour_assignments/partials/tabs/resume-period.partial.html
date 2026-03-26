@@ -1,0 +1,82 @@
+<div class="filter-list-view-toolbar md-padding" layout="row" layout-align="space-between center" flex>
+  <div layout="row" layout-align="space-between end" flex>
+    <form name="searchForm" class="md-inline-form" novalidate flex>
+
+      <div layout="column" layout-gt-sm="row" layout-align="space-between start" flex>
+        <div layout="column" layout-gt-sm="row" layout-align="start start" flex>
+
+          <md-input-container class="md-icon-float">
+            <label>Mes</label>
+            <md-select ng-model="vm.periodResumeForm.month" style="min-width: 128px">
+              <md-option ng-value="1">Enero</md-option>
+              <md-option ng-value="2">Febrero</md-option>
+              <md-option ng-value="3">Marzo</md-option>
+              <md-option ng-value="4">Abril</md-option>
+              <md-option ng-value="5">Mayo</md-option>
+              <md-option ng-value="6">Junio</md-option>
+              <md-option ng-value="7">Julio</md-option>
+              <md-option ng-value="8">Agosto</md-option>
+              <md-option ng-value="9">Septiembre</md-option>
+              <md-option ng-value="10">Octubre</md-option>
+              <md-option ng-value="11">Noviembre</md-option>
+              <md-option ng-value="12">Diciembre</md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Año</label>
+            <input ng-model="vm.periodResumeForm.year" type="number" min="2012" max="{{vm.current_year}}">
+          </md-input-container>
+
+          <md-button type="submit" ng-click="vm.fetchResume()" class="send-button md-raised" ng-disabled="form.$invalid" aria-label="Buscar">
+            Buscar
+          </md-button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="md-whiteframe-4dp" ng-if='vm.resume.length > 0'>
+  <table class="simple" ms-responsive-table>
+    <tbody>
+    <tr ng-repeat="item in vm.resume">
+      <td width="40px"><md-icon md-font-icon="icon-folder"></md-icon></td>
+      <td>
+        <div class="info" flex layout="column">
+          <span class="font-size-16">{{item.work.id}} - {{item.work.name}}</span>
+        </div>
+      </td>
+      <td>
+        <div layout="row" layout-align="space-between center">
+          <div>
+            <span class="grey-500-fg"><strong>Horas trabajadas</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{item.minutes_parsed.hours}} horas<span ng-show="item.minutes_parsed.minutes > 0"> y {{item.minutes_parsed.minutes}} minutos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td width="30%" style="border-width: 5px" class="grey-100-bg">
+        <div layout="row" layout-align="space-between center">
+          <div ng-repeat="place in item.places">
+            <span class="grey-500-fg"><strong>{{place.name}}</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{place.minutes_parsed.hours}} horas<span ng-show="place.minutes_parsed.minutes > 0"> y {{place.minutes_parsed.minutes}} minutos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div layout="row" layout-align="center" flex ng-if='!vm.resume.length > 0'>
+  <h3>No existen datos para el periodo seleccionado..</h3>
+</div>

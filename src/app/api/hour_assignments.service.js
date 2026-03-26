@@ -1,0 +1,31 @@
+(function () {
+  'use strict';
+  angular.module('app.api').service('HourAssignmentsService', HourAssignmentsService);
+
+  /** @ngInject */
+  function HourAssignmentsService(Restangular) {
+    this.index = index;
+    this.create = create;
+    this.update = update;
+    this.destroy = destroy;
+
+    var RESOURCE = 'hour_assignments';
+
+    function index(params) {
+      return Restangular.one(RESOURCE).get(params);
+    }
+
+    function create(object) {
+      return Restangular.all(RESOURCE).customPOST(object);
+    }
+
+    function update(id, object) {
+      return Restangular.one(RESOURCE, id).customPUT(object);
+    }
+
+    function destroy(id) {
+      return Restangular.one(RESOURCE, id).customDELETE();
+    }
+  }
+
+})();

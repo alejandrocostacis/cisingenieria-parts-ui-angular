@@ -1,0 +1,72 @@
+<div ng-if="vm.ui.loadingCurrentItem" layout="column" layout-align="center center">
+  <md-progress-circular class="md-accent" md-mode="indeterminate" md-diameter="64"></md-progress-circular>
+  <div>Cargando obra...</div>
+</div>
+
+<div ng-if="!vm.ui.loadingCurrentItem && vm.currentItem">
+  <div class="item-content">
+
+    <div>
+
+      <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="DETALLES">
+            <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+              <ms-widget layout="row" flex="100" flex-gt-xs="100" flex-gt-md="40">
+                <ms-widget-front class="grey-50-bg">
+                  <div class="info-box" flex="100" ng-include="'app/main/works/partials/tabs/detail/details-box.partial.html'"></div>
+                </ms-widget-front>
+              </ms-widget>
+
+              <ms-widget layout="row" flex="100" flex-gt-xs="100" flex-gt-md="60">
+                <ms-widget-front class="grey-50-bg">
+                  <div class="info-box" flex="100" ng-include="'app/main/works/partials/tabs/detail/widgets.partial.html'"></div>
+                </ms-widget-front>
+              </ms-widget>
+
+            </div>
+          </md-tab>
+          <md-tab label="GRÁFICO" ng-if="vm.role == 'UserAdmin' || vm.role == 'UserAreaChief' || vm.role == 'UserCoordinator' || vm.role == 'UserManager' || vm.role == 'UserProjectLeader' || vm.role == 'UserAuxiliaryCoordinator'">
+            <md-content class="md-padding">
+                <div ng-include="'app/main/works/partials/tabs/graph.partial.html'">
+              </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="COTIZACIONES" ng-if="vm.role == 'UserAdmin' || vm.role == 'UserAreaChief' || vm.role == 'UserCoordinator' || vm.role == 'UserManager' || vm.role == 'UserProjectLeader' || vm.role == 'UserAuxiliaryCoordinator'">
+            <md-content class="md-padding">
+              <div ng-include="'app/main/works/partials/tabs/work-quotations.partial.html'">
+              </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="RESUMEN COTIZACIONES" ng-if="vm.role == 'UserAdmin' || vm.role == 'UserAreaChief' || vm.role == 'UserCoordinator' || vm.role == 'UserManager' || vm.role == 'UserProjectLeader' || vm.role == 'UserAuxiliaryCoordinator'">
+            <md-content class="md-padding">
+              <div ng-include="'app/main/works/partials/tabs/work-quotations-summary.partial.html'">
+              </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="RESUMEN HORAS IMPUTADAS">
+            <md-content class="md-padding">
+              <div ng-include="'app/main/works/partials/tabs/hour-assignments-summary.partial.html'">
+              </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="PARTES">
+            <md-content class="md-padding">
+              <div ng-include="'app/main/works/partials/tabs/daily-reports.partial.html'">
+              </div>
+            </md-content>
+          </md-tab>
+          <!-- <md-tab label="HS por Especialidad">
+            <md-content class="md-padding">
+              <div ng-include="'app/main/works/partials/tabs/hours-by-spec.partial.html'">
+              </div>
+            </md-content>
+          </md-tab> -->
+        </md-tabs>
+      </md-content>
+
+    </div>
+
+  </div>
+</div>

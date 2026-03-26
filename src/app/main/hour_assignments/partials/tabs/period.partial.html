@@ -1,0 +1,160 @@
+
+
+
+<div class="filter-list-view-toolbar md-padding" layout="row" layout-align="space-between center" flex>
+  <div layout="row" layout-align="space-between end" flex>
+    <form name="searchForm" class="md-inline-form" novalidate flex>
+
+      <div layout="column" layout-gt-sm="row" layout-align="space-between start" flex>
+        <div layout="column" layout-gt-sm="row" layout-align="start start" flex>
+
+          <md-input-container class="md-icon-float">
+            <label>Mes</label>
+            <md-select ng-model="vm.periodForm.month" style="min-width: 128px">
+              <md-option ng-value="1">Enero</md-option>
+              <md-option ng-value="2">Febrero</md-option>
+              <md-option ng-value="3">Marzo</md-option>
+              <md-option ng-value="4">Abril</md-option>
+              <md-option ng-value="5">Mayo</md-option>
+              <md-option ng-value="6">Junio</md-option>
+              <md-option ng-value="7">Julio</md-option>
+              <md-option ng-value="8">Agosto</md-option>
+              <md-option ng-value="9">Septiembre</md-option>
+              <md-option ng-value="10">Octubre</md-option>
+              <md-option ng-value="11">Noviembre</md-option>
+              <md-option ng-value="12">Diciembre</md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Año</label>
+            <input ng-model="vm.periodForm.year" type="number" min="2012" max="{{vm.current_year}}">
+          </md-input-container>
+
+          <md-button type="submit" ng-click="vm.fetchHourAssignments()" class="send-button md-raised" ng-disabled="form.$invalid" aria-label="Buscar">
+            Buscar
+          </md-button>
+        </div>
+
+        <md-dialog-actions>
+          <md-button class="md-warn md-raised" ng-click="vm.openClosePeriodDialog($event)">
+            Cerrar Periodo
+          </md-button>
+        </md-dialog-actions>
+      </div>
+    </form>
+  </div>
+</div>
+
+<table class="simple" ms-responsive-table ng-if='vm.hourAssignments.length > 0'>
+  <tbody>
+    <tr ng-repeat-start="item in vm.hourAssignments" ng-class="{'grey-100-bg': item.minutes_to_assign > 0, 'green-50-bg': item.minutes_to_assign == 0}">
+      <td width="40px">
+        <md-icon md-font-icon="icon-calendar" ng-class="{'grey-500-fg': item.minutes_to_assign > 0, 'green-500-fg': item.minutes_to_assign == 0}"></md-icon>
+      </td>
+      <td>
+        <div class="info" flex layout="column">
+          <span class="font-size-16">{{item.date | date: 'dd-MM-yyyy'}}</span>
+
+          <div class="message text-truncate">
+            <div layout="column" layout-align="center start">
+              {{item.minutes_parsed.hours}} horas<span ng-hide="item.minutes_parsed.minutes == 0"> y {{item.minutes_parsed.minutes}} minutos</span>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <span ng-repeat='checkin in item.checkins'>[ IN: {{checkin.in | date: 'HH:mm'}} -> OUT: {{checkin.out | date: 'HH:mm'}} ]  </span>
+        </div>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="text-align: right">
+        <span class="text-boxed" ng-if="item.minutes_to_assign > 0">{{item.minutes_to_assign_parsed.hours}} horas<span ng-hide="item.minutes_to_assign_parsed.minutes == 0"> y {{item.minutes_to_assign_parsed.minutes}} minutos</span>          sin imputar</span>
+        <span class="text-boxed green-200-bg" ng-if="item.minutes_to_assign == 0">Completado</span>
+      </td>
+      <td width="140px" style="text-align: right">
+        <md-button class="md-icon-button" aria-label="create hour assignment" ng-click="vm.openHourAssignmentDialog($event, item)"
+          ng-if="item.minutes_to_assign > 0">
+          <md-icon md-font-icon="icon-plus-circle"></md-icon>
+        </md-button>
+        <md-button ng-disabled="item.daily_reports.length == 0" class="md-icon-button" ng-click="vm.collapseAndExpandDate(item)"
+          aria-label="collapse-expand date">
+          <md-icon ng-if="!item.expanded" md-font-icon="icon-chevron-down"></md-icon>
+          <md-icon ng-if="item.expanded" md-font-icon="icon-chevron-up"></md-icon>
+        </md-button>
+      </td>
+    </tr>
+    <tr ng-repeat-end ng-repeat="report in item.daily_reports" ng-show="item.expanded">
+      <td width="40px">
+        <md-icon md-font-icon="icon-clock"></md-icon>
+      </td>
+      <td>{{report.work.id}} - {{report.work.name}}</td>
+      <td>
+        <div class="info" flex layout="column">
+          <span class="grey-500-fg"><strong>Lugar</strong></span>
+          <div class="message text-truncate">
+            <div layout="column" layout-align="center start">
+              {{report.place.name}}
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="info" flex layout="column">
+          <span class="grey-500-fg"><strong>Actividad</strong></span>
+          <div class="message text-truncate">
+            <div layout="column" layout-align="center start">
+              {{report.activity.name}}
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="info" flex layout="column">
+          <span class="grey-500-fg"><strong>Area</strong></span>
+          <div class="message text-truncate">
+            <div layout="column" layout-align="center start">
+              {{report.speciality.employee_area.name}}
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="info" flex layout="column">
+          <span class="grey-500-fg"><strong>Especialidad</strong></span>
+          <div class="message text-truncate">
+            <div layout="column" layout-align="center start">
+              {{report.speciality.name}}
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="info" flex layout="column" ng-if="report.observations != ''">
+          <span class="grey-500-fg"><strong>Observaciones</strong></span>
+          <div class="message text-truncate">
+            <div layout="column" layout-align="center start">
+              {{report.observations}}
+            </div>
+          </div>
+        </div>
+      </td>
+      <td style="text-align: right">{{report.minutes_parsed.hours}} horas<span ng-hide="report.minutes_parsed.minutes == 0"> y {{report.minutes_parsed.minutes}} minutos</span></td>
+      <td width="140px" style="text-align: right">
+        <md-button class="md-icon-button" aria-label="update sub-item" ng-if="report.open" ng-click="vm.openHourAssignmentDialog($event, item, report)">
+          <md-icon md-font-icon="icon-border-color"></md-icon>
+        </md-button>
+        <span class="text-boxed red-200-bg" ng-if="!report.open">CERRADO</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div layout="row" layout-align="center" flex ng-if='!vm.hourAssignments.length > 0'>
+  <h3>No existen datos para el periodo seleccionado..</h3>
+</div>

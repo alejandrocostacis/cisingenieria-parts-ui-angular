@@ -1,0 +1,48 @@
+<!-- TOOLBAR -->
+<div class="toolbar" layout="row" layout-align="space-between center">
+
+    <div layout="row" layout-align="start center"></div>
+
+    <div layout="row" layout-align="start center">
+        <!-- SETTINGS MENU -->
+        <md-menu class="settings-menu">
+            <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="settings">
+                <md-icon md-font-icon="icon-view-module"></md-icon>
+            </md-button>
+            <md-menu-content width="3">
+                <md-menu-item>
+                    <md-button ng-click="vm.changeView('classic')">
+                        <md-icon md-font-icon="icon-checkbox-blank-outline" ng-if="vm.currentView !== 'classic'"></md-icon>
+                        <md-icon md-font-icon="icon-checkbox-marked" class="md-accent" ng-if="vm.currentView === 'classic'"></md-icon>
+                        <span>Vista Clásica</span>
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item hide-xs>
+                    <md-button ng-click="vm.changeView('outlook')">
+                        <md-icon md-font-icon="icon-checkbox-blank-outline" ng-if="vm.currentView !== 'outlook'"></md-icon>
+                        <md-icon md-font-icon="icon-checkbox-marked" class="md-accent" ng-if="vm.currentView === 'outlook'"></md-icon>
+                        <span>Vista Panoramica</span>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <!-- / SETTINGS MENU -->
+    </div>
+</div>
+<!-- / TOOLBAR -->
+
+<!-- CONTENT WRAPPER -->
+<div class="content-wrapper" layout="row" flex>
+
+    <!-- ITEM LIST -->
+    <div class="content item-list" ng-include="'app/main/settings/general/views/outlook/list/list.html'" ms-scroll flex="40">
+    </div>
+    <!-- / ITEM LIST -->
+
+    <!-- ITEM DETAIL -->
+    <div class="content item-detail" ng-include="vm.currentItem.detailView.outlook" ms-scroll layout="column" flex="60">
+    </div>
+    <!-- / ITEM DETAIL -->
+
+</div>
+<!-- / CONTENT WRAPPER -->

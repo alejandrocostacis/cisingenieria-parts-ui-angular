@@ -1,0 +1,25 @@
+<div class="widget-group" layout="row" flex layout-wrap>
+  <ms-widget layout="row" flex="100">
+    <ms-widget-front class="white-bg">
+      <table class="simple" ms-responsive-table>
+        <tbody>
+        <tr ng-repeat-start="employeeArea in vm.quotesSummary.employee_areas" ng-if="employeeArea.value > 0" class="grey-200-bg">
+          <td width="40px"><md-icon md-font-icon="icon-clock blue-800-fg"></md-icon></td>
+          <td class="blue-800-fg">{{ employeeArea.name }}</td>
+          <td class="blue-800-fg" style="text-align: right">{{ employeeArea.value }} horas</td>
+        </tr>
+        <tr ng-repeat-end ng-repeat="speciality in employeeArea.specialities" ng-if="speciality.value > 0" class="grey-100-bg">
+          <td></td>
+          <td>{{ speciality.name }}</td>
+          <td>{{ speciality.value }} horas</td>
+        </tr>
+        </tbody>
+      </table>
+      <md-divider></md-divider>
+      <div>
+        <h3 class="blue-800-fg" style="display: flex; float: left; margin-left: 24px"><b>TOTAL</b></h3>
+        <h3 class="blue-800-fg" style="display: flex; float: right; margin-right: 24px"><b>{{ vm.quotesSummary.value }} HORAS COTIZADAS</b></h3>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+</div>

@@ -1,0 +1,7 @@
+<div ng-if="!vm.currentItem && !vm.ui.loadingCurrentItem" ng-include="'app/main/employees/employees/partials/toolbar/toolbar.partial.html'"></div>
+<div ng-if="!vm.currentItem && !vm.ui.loadingCurrentItem" style="padding-top: 24px" class="md-background-bg md-hue-3 secondary-text" ng-include="'app/main/employees/employees/partials/filter_toolbar/filter-toolbar.partial.html'"></div>
+
+<div class="content-wrapper" layout="column" flex>
+  <div class="content item-detail scrollable" ng-if="vm.currentItem || vm.ui.loadingCurrentItem" ng-include="'app/main/employees/employees/views/classic/detail/detail.html'" ms-scroll flex></div>
+  <div class="content item-list scrollable" ng-if="!vm.currentItem || vm.ui.loadingItems" ng-include="'app/main/employees/employees/views/classic/list/list.html'" ms-scroll flex></div>
+</div>

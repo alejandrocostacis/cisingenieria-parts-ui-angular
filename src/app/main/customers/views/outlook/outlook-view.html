@@ -1,0 +1,7 @@
+<div ng-include="'app/main/customers/partials/toolbar/toolbar.partial.html'"></div>
+<div style="padding-top: 24px" class="md-background-bg md-hue-3 secondary-text" ng-include="'app/main/customers/partials/filter_toolbar/filter-toolbar.partial.html'"></div>
+
+<div class="content-wrapper" layout="row" flex>
+  <div class="content item-list scrollable" ng-include="'app/main/customers/views/outlook/list/list.html'" ms-scroll flex="50"></div>
+  <div class="content item-detail scrollable" ng-include="'app/main/customers/views/outlook/detail/detail.html'" ms-scroll layout="column" flex="50"></div>
+</div>

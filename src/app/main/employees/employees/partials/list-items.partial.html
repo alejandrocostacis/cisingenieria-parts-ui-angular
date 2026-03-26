@@ -1,0 +1,40 @@
+<div layout="row" layout-align="end center">
+  <md-content class="md-padding">
+    <span class="tag md-subhead">Mostrando {{vm.items.length}} resultados de {{vm.items_total_count}}</span>
+  </div>
+</div>
+
+<md-whiteframe class="md-whiteframe-1dp" layout layout-align="start start" flex>
+  <div flex="100">
+    <table class="simple item-list clickable" ms-responsive-table ng-if="!vm.ui.loadingItems">
+      <tbody>
+      <tr ng-repeat="item in vm.items | filter: vm.quickFilter" ng-click="vm.openItem(item.id)" class="item" ng-class="{'md-background-bg md-hue-3 secondary-text': vm.currentItem.id == item.id}">
+        <td class="icon-item"><md-icon md-font-icon="icon-account"></md-icon></td>
+        <td>
+          <div class="title" flex layout="column">
+            <span ng-class="{'red-500-fg': !item.user.active}">
+              <span class="item-id"># {{item.id}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{item.name}}</b>, {{item.lastname}}
+            </span>
+
+            <div class="sub-title">
+              <div layout="column" layout-align="center start">
+                {{ item.user.email}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td style="text-align: -webkit-right">
+          <div class="info" flex layout="column">
+            <span class="grey-500-fg"><strong>Legajo</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{item.personnel_file}}
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</md-whiteframe>

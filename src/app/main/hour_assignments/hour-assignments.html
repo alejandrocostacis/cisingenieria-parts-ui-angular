@@ -1,0 +1,40 @@
+<div class="page-layout carded left-sidenav" id="layout_hour_assignments" layout="row">
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg md-accent-bg"></div>
+  <!-- / TOP BACKGROUND -->
+  <!-- CENTER -->
+  <div class="center" layout="column" flex>
+    <!-- CONTENT HEADER -->
+    <div class="header" layout="row" layout-align="space-between center">
+      <div class="logo" layout="row" layout-align="start center">
+        <span class="logo-icon">
+            <md-icon class="icon" md-font-icon="icon-clock"></md-icon>
+        </span>
+        <span class="logo-text">Imputación de horas</span>
+      </div>
+    </div>
+    <!-- / CONTENT HEADER -->
+    <!-- CONTENT CARD -->
+    <div class="content-card scrollable" ms-scroll layout="column" flex>
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Periodo">
+          <md-content>
+            <div ng-include="'app/main/hour_assignments/partials/tabs/period.partial.html'"></div>
+          </md-content>
+        </md-tab>
+        <md-tab label="Resumen Periodo">
+          <md-content>
+            <div ng-include="'app/main/hour_assignments/partials/tabs/resume-period.partial.html'"></div>
+          </md-content>
+        </md-tab>
+        <md-tab label="Historial">
+          <md-content>
+            <div ng-include="'app/main/hour_assignments/partials/tabs/daily-reports-history.partial.html'"></div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </div>
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
+</div>

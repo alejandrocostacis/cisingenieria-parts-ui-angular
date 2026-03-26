@@ -1,0 +1,32 @@
+<div layout="row" layout-align="start center">
+
+  <md-menu>
+    <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Settings">
+      <md-icon md-font-icon="icon-view-module"></md-icon>
+    </md-button>
+    <md-menu-content width="3">
+      <md-menu-item>
+        <md-button ng-click="vm.changeView('classic')">
+          <md-icon md-font-icon="icon-checkbox-blank-outline" ng-if="vm.currentView.name !== 'classic'"></md-icon>
+          <md-icon md-font-icon="icon-checkbox-marked" class="md-accent" ng-if="vm.currentView.name === 'classic'"></md-icon>
+          <span>Vista Clasica</span>
+        </md-button>
+      </md-menu-item>
+      <md-menu-item hide-xs>
+        <md-button ng-click="vm.changeView('outlook')">
+          <md-icon md-font-icon="icon-checkbox-blank-outline" ng-if="vm.currentView.name !== 'outlook'"></md-icon>
+          <md-icon md-font-icon="icon-checkbox-marked" class="md-accent" ng-if="vm.currentView.name === 'outlook'"></md-icon>
+          <span>Vista panoramica</span>
+        </md-button>
+      </md-menu-item>
+      <!--<md-menu-item hide-xs>-->
+        <!--<md-button ng-click="vm.changeView('table')">-->
+          <!--<md-icon md-font-icon="icon-checkbox-blank-outline" ng-if="vm.currentView.name !== 'table'"></md-icon>-->
+          <!--<md-icon md-font-icon="icon-checkbox-marked" class="md-accent" ng-if="vm.currentView.name === 'table'"></md-icon>-->
+          <!--<span>Vista en tabla</span>-->
+        <!--</md-button>-->
+      <!--</md-menu-item>-->
+    </md-menu-content>
+  </md-menu>
+
+</div>

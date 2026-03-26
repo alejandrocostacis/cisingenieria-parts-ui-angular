@@ -1,0 +1,23 @@
+{
+  "development": {
+    "ENVIRONMENT": {
+      "domain": "partes.cis-ingenieria.com",
+      "apiUrl": "http://127.0.0.1:3000",
+      "siteUrl": "http://127.0.0.1"
+    }
+  },
+  "production": {
+    "ENVIRONMENT": {
+      "domain": "partes.cis-ingenieria.com",
+      "apiUrl": "https://gestion-api.cis-ingenieria.com",
+      "siteUrl": "http://gestion2.cis-ingenieria.com/"
+    }
+  },
+  "uat": {
+    "ENVIRONMENT": {
+      "domain": "partes.cis-ingenieria.com",
+      "apiUrl": "https://gestion-api-uat.cis-ingenieria.com",
+      "siteUrl": "http://gestion2-uat.cis-ingenieria.com/"
+    }
+  }
+}

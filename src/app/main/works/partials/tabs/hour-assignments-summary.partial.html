@@ -1,0 +1,25 @@
+<div class="widget-group" layout="row" flex layout-wrap>
+  <ms-widget layout="row" flex="100">
+    <ms-widget-front class="white-bg">
+      <table class="simple" ms-responsive-table>
+        <tbody>
+        <tr ng-repeat-start="employeeArea in vm.dailyReportsSummary.employee_areas" class="grey-200-bg">
+          <td width="40px"><md-icon md-font-icon="icon-clock blue-800-fg"></md-icon></td>
+          <td class="blue-800-fg">{{ employeeArea.name }}</td>
+          <td class="blue-800-fg" style="text-align: right">{{ vm.parseMinutes(employeeArea.value).hours }} horas y {{ vm.parseMinutes(employeeArea.value).minutes }} minutos</td>
+        </tr>
+        <tr ng-repeat-end ng-repeat="speciality in employeeArea.specialities" class="grey-100-bg">
+          <td></td>
+          <td>{{ speciality.name }}</td>
+          <td>{{ vm.parseMinutes(speciality.value).hours }} horas y {{ vm.parseMinutes(speciality.value).minutes }} minutos</td>
+        </tr>
+        </tbody>
+      </table>
+      <md-divider></md-divider>
+      <div>
+        <h3 class="blue-800-fg" style="display: flex; float: left; margin-left: 24px"><b>TOTAL</b></h3>
+        <h3 class="blue-800-fg" style="display: flex; float: right; margin-right: 24px"><b>{{ vm.parseMinutes(vm.dailyReportsSummary.value).hours }} HORAS Y {{ vm.parseMinutes(vm.dailyReportsSummary.value).minutes }} MINUTOS IMPUTADOS</b></h3>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+</div>

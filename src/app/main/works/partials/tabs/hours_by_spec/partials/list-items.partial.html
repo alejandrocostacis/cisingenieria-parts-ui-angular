@@ -1,0 +1,55 @@
+<div class="content fullpage-datatable" layout="column" flex>
+
+  <table class="dataTable row-border" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+    <thead>
+    <tr>
+      <th>LEGAJO</th>
+      <th>APELLIDO</th>
+      <th>NOMBRE</th>
+      <th>CATEGORIA</th>
+      <th>AREA</th>
+      <th class="grey-100-bg grey-800-fg">TOTAL</th>
+      <th ng-repeat="place in ::vm.hoursBySpec.places" class="green-50-bg">{{place.name}}</th>
+      <th ng-repeat="activity in ::vm.hoursBySpec.not_working_activities" class="blue-50-bg">{{activity.name}}</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="total in [1]">
+      <td></td>
+      <td>TOTAL</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="grey-100-bg grey-800-fg"><b>{{vm.hoursBySpec.working_minutes/60 | number : 2}}</b></td>
+      <td ng-repeat="place in ::vm.hoursBySpec.places" class="name green-50-bg"
+        ng-class="{'grey-500-fg': place.minutes == 0}">{{place.minutes/60 | number : 2}}</td>
+      <td ng-repeat="activity in ::vm.hoursBySpec.not_working_activities" class="name blue-50-bg"
+        ng-class="{'grey-500-fg': activity.minutes == 0}">{{activity.minutes/60 | number : 2}}</td>
+    </tr>
+    <tr>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td class="grey-100-bg"></td>
+      <td ng-repeat="place in ::vm.hoursBySpec.places" class="grey-100-bg"></td>
+      <td ng-repeat="activity in ::vm.hoursBySpec.not_working_activities" class="grey-100-bg"></td>
+    </tr>
+    <tr ng-repeat="item in ::vm.items">
+      <td class="name" ng-class="{'red-500-fg': !item.employee_active}">{{item.personnel_file}}</td>
+      <td class="name" ng-class="{'red-500-fg': !item.employee_active}">{{item.lastname}}</td>
+      <td class="name" ng-class="{'red-500-fg': !item.employee_active}">{{item.name}}</td>
+      <td class="name">{{item.employee_category_name}}</td>
+      <td class="name">{{item.employee_area_name}}</td>
+      <td class="name grey-100-bg grey-800-fg"><b>{{item.working_minutes/60 | number : 2}}</b></td>
+      <td ng-repeat="place in ::item.places" class="name green-50-bg"
+        ng-class="{'grey-500-fg': place.minutes == 0}">{{place.minutes/60 | number : 2}}</td>
+      <td ng-repeat="activity in ::item.not_working_activities" class="name blue-50-bg"
+        ng-class="{'grey-500-fg': activity.minutes == 0}">{{activity.minutes/60 | number : 2}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

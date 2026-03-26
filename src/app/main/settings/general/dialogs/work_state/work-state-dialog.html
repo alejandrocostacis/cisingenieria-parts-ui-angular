@@ -1,0 +1,101 @@
+<md-dialog class="work-state-dialog" aria-label="dialog">
+
+  <form name="vm.form" class="md-inline-form" novalidate>
+
+    <md-toolbar layout="column" ng-class="{'md-accent': vm.item.active, 'md-warn': !vm.item.active}">
+
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title"><md-icon md-font-icon="icon-cog" class="icon" style="margin-right: 12px; padding-bottom: 28px"></md-icon>Estado</span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+
+    </md-toolbar>
+
+    <md-dialog-content ms-scroll>
+      <md-input-container class="md-icon-float md-block">
+        <label>Estado</label>
+        <input ng-model="vm.item.name" name="name" type="text" ng-change="vm.resetForm()" required md-maxlength="64">
+        <div ng-messages="vm.form.name.$error" role="alert">
+          <div ng-message="name">{{vm.form.name.$error.name}}</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float">
+        <label>Color</label>
+        <md-select ng-model="vm.item.color">
+          <md-option value="grey-50">
+            <div class="tag" style="background: none">
+              <div class="tag-color grey-50-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+          <md-option value="grey-500">
+            <div class="tag" style="background: none">
+              <div class="tag-color grey-500-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+          <md-option value="red-500">
+            <div class="tag" style="background: none">
+              <div class="tag-color red-500-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+          <md-option value="blue-500">
+            <div class="tag" style="background: none">
+              <div class="tag-color blue-500-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+          <md-option value="purple-500">
+            <div class="tag" style="background: none">
+              <div class="tag-color purple-500-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+          <md-option value="yellow-500">
+            <div class="tag" style="background: none">
+              <div class="tag-color yellow-500-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+          <md-option value="orange-500">
+            <div class="tag" style="background: none">
+              <div class="tag-color orange-500-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+          <md-option value="green-500">
+            <div class="tag" style="background: none">
+              <div class="tag-color green-500-bg"></div>
+              <div class="tag-label"></div>
+            </div>
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center" style="height: 12px">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.save()" class="send-button md-raised" ng-class="{'md-accent': vm.item.active, 'md-warn': !vm.item.active}" ng-disabled="vm.form.$invalid || vm.form.$pristine" aria-label="SAVE">
+          GUARDAR
+        </md-button>
+      </div>
+      <div layout="row" layout-align="start center">
+        <md-input-container class="md-icon-float md-block">
+          <md-tooltip ng-if="!vm.item.active"><span>Activar</span></md-tooltip>
+          <md-tooltip ng-if="vm.item.active"><span>Desactivar</span></md-tooltip>
+          <md-switch ng-model="vm.item.active" aria-label="set active"></md-switch>
+        </md-input-container>
+        <md-button ng-if="!vm.new" class="md-icon-button md-warn" aria-label="delete" ng-click="vm.remove()">
+          <md-icon md-font-icon="icon-delete"></md-icon>
+          <md-tooltip><span>Eliminar definitivamente</span></md-tooltip>
+        </md-button>
+      </div>
+    </md-dialog-actions>
+
+  </form>
+
+</md-dialog>

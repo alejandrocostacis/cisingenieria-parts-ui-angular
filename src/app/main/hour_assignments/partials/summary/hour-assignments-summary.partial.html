@@ -1,0 +1,16 @@
+<table class="dataTable row-border" >
+  <thead>
+    <tr>
+      <th class="grey-100-bg grey-800-fg">TOTAL</th>
+      <th ng-repeat="place in ::vm.totals.places" class="green-50-bg">{{place.name}}</th>
+      <th ng-repeat="activity in ::vm.totals.not_working_activities" class="blue-50-bg">{{activity.name}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in vm.employeeHours">
+      <td class="name grey-100-bg grey-800-fg"><b>{{item.working_minutes/60 | number : 2}} hs.</b></td>
+      <td ng-repeat="place in ::item.places" class="name green-50-bg" ng-class="{'grey-500-fg': place.minutes == 0}">{{place.minutes/60 | number : 2}} hs.</td>
+      <td ng-repeat="activity in ::item.not_working_activities" class="name blue-50-bg" ng-class="{'grey-500-fg': activity.minutes == 0}">{{activity.minutes/60 | number : 2}} hs.</td>
+    </tr>
+  </tbody>
+</table>

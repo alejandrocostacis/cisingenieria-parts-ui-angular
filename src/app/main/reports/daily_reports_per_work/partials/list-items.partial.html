@@ -1,0 +1,31 @@
+<div class='content fullpage-datatable no-padding scrollable' layout='column' flex ms-scroll>
+  <table class='simple' ms-responsive-table>
+    <thead>
+      <tr>
+        <th>Obras</th>
+        <th ng-repeat='employee in vm.employees' aria-label='employee.name | capitalize: true'>
+          {{employee.acronym}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='work in ::vm.works' ng-if='vm.items[work.id]' class='grey-100-bg'>
+        <td class='no-padding'>
+          <div class='info' flex layout='column'>
+            <span class='font-size-12'>{{work.id}} - {{work.name}}</span>
+          </div>
+        </td>
+        <td ng-repeat='employee in ::vm.employees' class='name grey-50-bg green-800-fg'>
+          <div ng-if='::vm.items[work.id][employee.id]'>
+            <div ng-if="['UserAdmin', 'UserAreaChief', 'UserCoordinator', 'UserManager'].includes(vm.role)">
+              $ {{ ::vm.items[work.id][employee.id].total_cost | number: 2 }}
+            </div>
+            <div>
+              {{ ::vm.items[work.id][employee.id].total_minutes / 60 | number: 0 }} hs.
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

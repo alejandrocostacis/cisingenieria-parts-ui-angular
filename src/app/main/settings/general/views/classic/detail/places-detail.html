@@ -1,0 +1,27 @@
+<div class="item-header" layout="row" layout-align="space-between center">
+  <div>
+    <div class="subject" flex>{{vm.currentItem.name}}</div>
+  </div>
+  <md-button ng-if="vm.role == 'UserAdmin'" class="md-fab md-accent md-mini md-icon-button action-button" ng-click="vm.openPlaceDialog($event)" aria-label="create">
+    <md-icon md-font-icon="icon-plus"></md-icon>
+  </md-button>
+</div>
+
+<div class="item-content">
+  <div class="simple-table-container md-whiteframe-2dp">
+    <table class="simple" ms-responsive-table>
+      <tbody>
+      <tr ng-repeat="item in vm.currentItem.content.items" class="grey-100-bg">
+        <td ng-if="item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-check green-400-fg"></md-icon></td>
+        <td ng-if="!item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-remove red-200-fg"></md-icon></td>
+        <td ng-class="{'red-200-fg': !item.active, 'green-800-fg': item.active}">{{item.name}}</td>
+        <td ng-if="vm.role == 'UserAdmin'" style="text-align: right">
+          <md-button class="md-icon-button" ng-click="vm.openPlaceDialog($event, item)" aria-label="update">
+            <md-icon md-font-icon="icon-border-color"></md-icon>
+          </md-button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

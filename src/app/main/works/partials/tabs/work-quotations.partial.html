@@ -1,0 +1,50 @@
+
+<ms-widget layout="column" flex="100" flex-gt-sm="100">
+
+  <ms-widget-front class="white-bg">
+
+    <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+      <div class="h3"><div class="title" ><md-icon md-font-icon="icon-clock" class="icon" style="margin-right: 12px"></md-icon>Cotizar</div></div>
+      <div class="pv-16">
+        <md-button ng-if="vm.role == 'UserAdmin' || vm.role == 'UserCoordinator' || vm.role == 'UserManager' || vm.role == 'UserAuxiliaryCoordinator'" class="md-icon-button" ng-click="vm.openWorkQuotationDialog($event)" aria-label="update item">
+          <md-icon md-font-icon="icon-playlist-plus"></md-icon>
+        </md-button>
+      </div>
+    </div>
+
+    <div class="p-16">
+      <table class="simple" ms-responsive-table ng-if="vm.currentItem.work_quotations.length > 0">
+        <tbody>
+        <tr ng-repeat-start="workQuotation in vm.currentItem.work_quotations">
+          <td width="40px"><md-icon md-font-icon="icon-clock green-800-fg"></md-icon></td>
+          <td>
+            <span class="green-800-fg h3">+{{vm.sumPositiveSpecialitiesHours(workQuotation)}}</span>
+            <span ng-if="vm.sumNegativeSpecialitiesHours(workQuotation) < 0" class="red-500-fg padding-left-10 h3">{{vm.sumNegativeSpecialitiesHours(workQuotation)}}</span>
+            <span class="padding-left-5 h3">horas</span>
+          </td>
+          <td class="green-800-fg">{{workQuotation.observations}}</td>
+          <td class="green-800-fg" style="text-align: right">Creado el {{workQuotation.created_at | date: 'dd-MM-yyyy'}}</td>
+          <td style="text-align: right" width="240px">
+            <md-button ng-if="vm.role == 'UserAdmin' || vm.role == 'UserCoordinator' || vm.role == 'UserManager' || vm.role == 'UserAuxiliaryCoordinator'" class="md-icon-button" ng-click="vm.openWorkQuotationDialog($event, workQuotation)" aria-label="update work_quotation">
+              <md-icon md-font-icon="icon-border-color"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="vm.collapseAndExpandWorkQuotation(workQuotation)" aria-label="collapse-expand work_workQuotation">
+              <md-icon ng-if="!workQuotation.expanded" md-font-icon="icon-chevron-down"></md-icon>
+              <md-icon ng-if="workQuotation.expanded" md-font-icon="icon-chevron-up"></md-icon>
+            </md-button>
+          </td>
+        </tr>
+        <tr ng-repeat-end ng-repeat="workQuotationSpeciality in workQuotation.work_quotation_specialities" ng-show="workQuotation.expanded" style="background-color: white">
+          <td></td>
+          <td>{{ workQuotationSpeciality.employee_area.name }}</td>
+          <td>{{ workQuotationSpeciality.speciality.name }}</td>
+          <td ng-class="{'red-500-fg': workQuotationSpeciality.hours < 0}">{{ workQuotationSpeciality.hours }} horas</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </ms-widget-front>
+
+</ms-widget>

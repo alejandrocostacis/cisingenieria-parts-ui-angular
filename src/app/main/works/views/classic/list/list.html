@@ -1,0 +1,8 @@
+<div ng-if="vm.ui.loadingItems" layout="column" layout-align="center center">
+  <md-progress-circular class="md-accent" md-mode="indeterminate" md-diameter="64"></md-progress-circular>
+  <div>Cargando obras...</div>
+</div>
+
+<div ng-if="!vm.ui.loadingItems && vm.items.length === 0 && !vm.currentItem">No hay obras</div>
+
+<div ng-if="!vm.ui.loadingItems && vm.items.length > 0 && !vm.ui.loadingCurrentItem && !vm.currentItem" ng-include="'app/main/works/partials/list-items.partial.html'"></div>

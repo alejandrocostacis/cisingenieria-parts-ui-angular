@@ -1,0 +1,60 @@
+<md-dialog class="work-dialog" aria-label="dialog">
+  <md-toolbar class="md-accent md-tall" layout="column">
+    <div
+      class="md-toolbar-tools md-toolbar-tools-top"
+      layout="row"
+      layout-align="space-between"
+    >
+      <span class="title">
+        <md-icon
+          md-font-icon="icon-city"
+          class="icon"
+          style="margin-right: 12px; padding-bottom: 28px"
+        />
+        Exportación a XLSX
+      </span>
+      <md-button
+        class="md-icon-button"
+        ng-click="vm.cancel()"
+        aria-label="close dialog"
+      >
+        <md-icon md-font-icon="icon-close" />
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content ms-scroll>
+    <div class="simple-table-container md-whiteframe-2dp" ng-hide="vm.loading">
+      <table class="simple" ms-responsive-table>
+        <tbody>
+          <tr class="grey-100-bg">
+            <td width="80px">
+              <span>
+                <md-icon md-font-icon="icon-attachment green-400-fg" />
+              </span>
+              <span class="font-size-16 text-capitalize"
+                >{{ vm.item.size }}</span
+              >
+            </td>
+            <td>
+              <div
+                class="tag"
+                layout="row"
+                layout-align="start center"
+                style="background: none"
+              >
+                <a
+                  ng-href="{{vm.item.file.url}}"
+                  class="tag-label"
+                  aria-label="Descargar"
+                  >{{ vm.item.name }}</a
+                >
+                <md-tooltip><span>Descargar</span></md-tooltip>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-dialog-content>
+</md-dialog>

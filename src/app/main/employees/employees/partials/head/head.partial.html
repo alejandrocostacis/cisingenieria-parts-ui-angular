@@ -1,0 +1,21 @@
+<div class="head" layout="row" layout-align="space-between center">
+
+  <div class="logo" layout="row" layout-align="start center">
+    <md-button ng-if="vm.currentItem && vm.currentView.name == 'classic'" class="md-icon-button logo-icon" aria-label="Back" ng-click="vm.closeItem()">
+      <md-icon md-font-icon="icon-reply"></md-icon>
+    </md-button>
+    <span ng-if="vm.currentItem && vm.currentView.name == 'classic'" class="logo-icon">
+      <md-icon md-font-icon="icon-account" class="icon"></md-icon>
+    </span>
+    <span ng-if="!vm.currentItem" class="logo-icon">
+        <md-icon md-font-icon="icon-account-multiple" class="icon"></md-icon>
+    </span>
+    <span ng-if="!vm.currentItem" class="logo-text">Empleados</span>
+    <span ng-if="vm.currentItem" class="logo-text">#{{vm.currentItem.id}} - ({{vm.currentItem.acronym}}) {{vm.currentItem.name}}, {{vm.currentItem.lastname}}</span>
+  </div>
+
+  <div ng-if="['UserAdmin','UserHumanResourceManager'].includes(vm.role) && !vm.currentItem">
+    <md-button class="md-primary md-raised" aria-label="addNew" ng-click="vm.openItemDialog($event)">Nuevo</md-button>
+  </div>
+
+</div>

@@ -1,0 +1,134 @@
+<div class="filter-list-view-toolbar" layout="row" layout-align="space-between center" flex style="max-height: none">
+  <form name="form" class="md-inline-form" novalidate flex>
+
+    <div layout="row" layout-align="space-between end" flex>
+
+      <div layout="column" layout-align="space-between start" flex>
+        <div layout="column" layout-gt-sm="row" layout-align="start start" flex>
+
+          <md-input-container class="md-icon-float" style='margin-bottom: 0'>
+            <label>Código</label>
+            <input ng-model="vm.filterForm.id" type="text">
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Tipo</label>
+            <md-select ng-model="vm.filterForm.work_type_id" style="min-width: 128px">
+              <md-option ng-value="0">
+                <b>Todos</b>
+              </md-option>
+              <md-option ng-class="{'red-500-fg': !workType.active}"
+                ng-repeat="workType in vm.filterInputs.work_types" ng-value="workType.id">
+                {{workType.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Grupo</label>
+            <md-select ng-model="vm.filterForm.work_group_id" style="min-width: 128px">
+              <md-option ng-value="0">
+                <b>Todos</b>
+              </md-option>
+              <md-option ng-class="{'red-500-fg': !workGroup.active}"
+                ng-repeat="workGroup in vm.filterInputs.work_groups" ng-value="workGroup.id">
+                {{workGroup.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Cliente</label>
+            <md-select ng-model="vm.filterForm.customer_id" style="min-width: 128px">
+              <md-option ng-value="0">
+                <b>Todos</b>
+              </md-option>
+              <md-option ng-class="{'red-500-fg': !customer.active}"
+                ng-repeat="customer in vm.filterInputs.customers" ng-value="customer.id">
+                {{customer.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+        </div>
+
+        <div layout="column" layout-gt-sm="row" layout-align="start start" flex>
+
+          <md-input-container class="md-icon-float">
+            <label>Responsable</label>
+            <md-select ng-model="vm.filterForm.employee_id" style="min-width: 128px">
+              <md-option ng-value="0">
+                <b>Todos</b>
+              </md-option>
+              <md-option ng-class="{'red-500-fg': !employee.user.active}"
+                ng-repeat="employee in vm.filterInputs.employees" ng-value="employee.id">
+                {{employee.acronym}} - {{employee.name | capitalize: true}} {{employee.lastname | capitalize: true}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Estado</label>
+            <md-select ng-model="vm.filterForm.work_state_id" style="min-width: 128px">
+              <md-option ng-value="0">
+                <b>Todos</b>
+              </md-option>
+              <md-option ng-class="{'red-500-fg': !workState.active}"
+                ng-repeat="workState in vm.filterInputs.work_states" ng-value="workState.id">
+                <div class="tag" layout="row">
+                  <div class="tag-color {{ workState.color }}-bg"></div>
+                  <div class="tag-label {{ workState.color }}-fg">{{ workState.name }}</div>
+                </div>
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Activo</label>
+            <md-select ng-model="vm.filterForm.active" style="min-width: 128px">
+              <md-option ng-value="-1">
+                <b>Todos</b>
+              </md-option>
+              <md-option ng-value="1">
+                <b>Si</b>
+              </md-option>
+              <md-option ng-value="0">
+                <b>No</b>
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Resultados</label>
+            <md-select ng-model="vm.filterForm.per_page" style="min-width: 128px">
+              <md-option ng-value="50">
+                50
+              </md-option>
+              <md-option ng-value="100">
+                100
+              </md-option>
+              <md-option ng-value="300">
+                300
+              </md-option>
+              <md-option ng-value="500">
+                500
+              </md-option>
+              <md-option ng-value="1000">
+                1000
+              </md-option>
+              <md-option ng-value="0">
+                <b>Todos</b>
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-dialog-actions>
+            <md-button type="submit" ng-click="vm.searchClick()" class="send-button md-raised" aria-label="BUSCAR">
+              Buscar
+            </md-button>
+          </md-dialog-actions>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

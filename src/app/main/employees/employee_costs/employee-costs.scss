@@ -1,0 +1,48 @@
+#layout_employee_costs {
+  .center {
+    .header {
+      padding: 24px 0;
+      height: 100px;
+      min-height: 100px;
+      max-height: 100px;
+      .logo {
+        .logo-icon {
+          margin: 0 16px 0 0;
+
+          md-icon {
+            color: #FFFFFF;
+          }
+        }
+        .logo-text {
+          font-size: 24px;
+          color: #FFFFFF;
+        }
+      }
+      .search {
+        height: 56px;
+        line-height: 56px;
+        padding: 18px;
+        background: #FFFFFF;
+        .icon {
+          margin: 0;
+        }
+        input {
+          padding-left: 16px;
+          height: 56px;
+          color: rgba(0, 0, 0, 0.54);
+        }
+      }
+    }
+    .content-card {
+
+    }
+    .content-wrapper {
+      .input-changed {
+        border: 1px solid #F44336;
+      }
+      .input-not-changed {
+        border: 1px solid #B0BEC5;
+      }
+    }
+  }
+}

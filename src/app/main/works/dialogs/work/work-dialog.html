@@ -1,0 +1,170 @@
+<md-dialog class="work-dialog" aria-label="dialog">
+  <form name="vm.form" class="md-inline-form" novalidate>
+    <md-toolbar class="md-accent md-tall" layout="column">
+
+      <md-toolbar ng-class="{'md-accent': vm.item.active, 'md-warn': !vm.item.active}" layout="column">
+        <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+          <span class="title">
+            <md-icon md-font-icon="icon-city" class="icon"
+            style="margin-right: 12px; padding-bottom: 28px"></md-icon>
+            Obra
+          </span>
+          <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="close dialog">
+            <md-icon md-font-icon="icon-close"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+    </md-toolbar>
+
+    <md-dialog-content ms-scroll>
+      <md-input-container class="md-icon-float md-block">
+        <label>Nombre</label>
+        <input ng-model="vm.item.name" name="name" type="text" ng-change="vm.resetForm()" required md-maxlength="64">
+        <div ng-messages="vm.form.name.$error" role="alert">
+          <div ng-message="name">{{vm.form.name.$error.name}}</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float">
+        <label>Tipo</label>
+        <md-select required="true" ng-model="vm.item.work_type.id" style="min-width: 128px">
+          <md-option ng-class="{'red-500-fg': !workType.active}" ng-repeat="workType in vm.workTypes" ng-value="workType.id">
+            {{workType.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float">
+        <label>Grupo</label>
+        <md-select required="true" ng-model="vm.item.work_group.id" style="min-width: 128px">
+          <md-option ng-class="{'red-500-fg': !workGroup.active}" ng-repeat="workGroup in vm.workGroups" ng-value="workGroup.id">
+            {{workGroup.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float">
+        <label>Estado</label>
+        <md-select required="true" ng-model="vm.item.work_state.id" style="min-width: 128px">
+          <md-option ng-class="{'red-500-fg': !workState.active}" ng-repeat="workState in vm.workStates" ng-value="workState.id">
+            <div class="tag" layout="row">
+              <div class="tag-color {{ workState.color }}-bg"></div>
+              <div class="tag-label {{ workState.color }}-fg">{{ workState.name }}</div>
+            </div>
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Responsables de CIS</label>
+        <md-select ng-model="vm.item.employees"
+          md-on-close="vm.clearSearchTerm()"
+          data-md-container-class="selectdemoSelectHeader"
+          multiple>
+          <md-select-header class="demo-select-header">
+            <input ng-model="vm.searchEmployeeTerm"
+              type="search"
+              placeholder="Buscar un empleado.."
+              class="md-text input-employee">
+          </md-select-header>
+          <md-optgroup label="Empleados">
+            <md-option ng-value="employee" ng-repeat="employee in vm.employees | filter:vm.searchEmployeeTerm">
+              {{employee.employee_category.employee_position.name | capitalize: true}}: {{employee.acronym}} - {{employee.name | capitalize: true}} {{employee.lastname | capitalize: true}}
+            </md-option>
+          </md-optgroup>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+          <label>Cliente</label>
+          <md-autocomplete
+            md-no-cache="true"
+            md-selected-item="vm.inputForm.customer.selected"
+            md-search-text="vm.inputForm.customer.searchText"
+            md-selected-item-change="vm.onSelectedCustomerChanged(customer)"
+            md-items="customer in vm.filterCustomers(vm.inputForm.customer.searchText)"
+            md-item-text="customer.name"
+            md-min-length="0"
+            style="margin-bottom: 32px">
+            <md-item-template>
+              <span ng-class="{'red-500-fg': !customer.active}" md-highlight-text="vm.inputForm.customer.searchText"
+                md-highlight-flags="^i">{{customer.name}}</span>
+            </md-item-template>
+            <md-not-found>
+              No se han encontrado clientes.
+            </md-not-found>
+          </md-autocomplete>
+      </md-input-container>
+
+      <md-input-container class="md-icon-float md-block">
+          <label>Unidad Económica</label>
+          <md-autocomplete
+            md-no-cache="true"
+            md-selected-item="vm.inputForm.economicUnit.selected"
+            md-search-text="vm.inputForm.economicUnit.searchText"
+            md-items="economicUnit in vm.filterEconomicUnits(vm.inputForm.economicUnit.searchText)"
+            md-item-text="economicUnit.name"
+            md-min-length="0"
+            style="margin-bottom: 32px">
+            <md-item-template>
+              <span ng-class="{'red-500-fg': !economicUnit.active}" md-highlight-text="vm.inputForm.economicUnit.searchText"
+                md-highlight-flags="^i">{{economicUnit.name}}</span>
+            </md-item-template>
+            <md-not-found>
+              No se han encontrado unidades economicas.
+            </md-not-found>
+          </md-autocomplete>
+      </md-input-container>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Costo Estimado</label>
+          <input ng-model="vm.item.estimated_cost" type="number" min="0">
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Valor de venta</label>
+          <input ng-model="vm.item.sell_value" type="number" min="0">
+        </md-input-container>
+      </div>
+
+      <label>Fecha de Adjudicación</label>
+      <md-datepicker ng-model="vm.item.awarded_at" name="awardedAtField"
+        md-placeholder="Fecha" md-max-date="vm.todayDate"></md-datepicker>
+      <div class="validation-messages" ng-messages="form.awardedAtField.$error">
+        <div ng-message="valid">Fecha incorrecta</div>
+        <div ng-message="maxdate">Fecha incorrecta</div>
+      </div>
+
+      <md-input-container class="md-block">
+        <label>Notas</label>
+        <textarea ng-model="vm.item.notes" md-maxlength="150" rows="3" md-select-on-focus></textarea>
+      </md-input-container>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center" style="height: 12px">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.save()" class="send-button md-raised"
+          ng-class="{'md-accent': vm.item.active, 'md-warn': !vm.item.active}"
+          ng-disabled="vm.form.$invalid || vm.form.$pristine || !vm.inputForm.economicUnit.selected || !vm.item.employees"
+          aria-label="Guardar">
+          GUARDAR
+        </md-button>
+      </div>
+
+      <div layout="row" layout-align="start center">
+        <md-input-container class="md-icon-float md-block">
+          <md-tooltip ng-if="!vm.item.active"><span>Activar</span></md-tooltip>
+          <md-tooltip ng-if="vm.item.active"><span>Desactivar</span></md-tooltip>
+          <md-switch ng-model="vm.item.active" aria-label="set active"></md-switch>
+        </md-input-container>
+        <md-button ng-if="!vm.new" class="md-icon-button md-warn" aria-label="delete" ng-click="vm.remove()">
+          <md-icon md-font-icon="icon-delete"></md-icon>
+          <md-tooltip><span>Eliminar definitivamente</span></md-tooltip>
+        </md-button>
+      </div>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

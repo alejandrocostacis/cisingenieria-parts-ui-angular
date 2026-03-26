@@ -1,0 +1,79 @@
+<div class="widget-group" layout="row" flex="100" layout-wrap>
+  <!--<ms-widget layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">-->
+    <!--<ms-widget-front class="white-bg">-->
+      <!--<div class="ph-8 pv-16 h-55" layout="row" layout-align="space-between center">-->
+      <!--</div>-->
+
+      <!--<div class="pt-8 pb-32" layout="column" layout-align="center center">-->
+        <!--<div class="light-green-fg font-size-32 line-height-32">-->
+          <!--${{vm.dailyReportsSummary.cost | number: 2}}-->
+        <!--</div>-->
+        <!--<div class="h3 secondary-text font-weight-500">DE COSTO</div>-->
+        <!--<div class="h3 secondary-text font-weight-500">TOTAL</div>-->
+      <!--</div>-->
+    <!--</ms-widget-front>-->
+  <!--</ms-widget>-->
+
+  <!--<ms-widget layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">-->
+    <!--<ms-widget-front class="white-bg">-->
+      <!--<div class="ph-8 pv-16 h-55" layout="row" layout-align="space-between center">-->
+      <!--</div>-->
+
+      <!--<div class="pt-8 pb-32" layout="column" layout-align="center center">-->
+        <!--<div class="light-blue-fg font-size-72 line-height-72">-->
+          <!--{{vm.quotesSummary.value}}-->
+        <!--</div>-->
+        <!--<div class="h3 secondary-text font-weight-500">HORAS COTIZADAS</div>-->
+      <!--</div>-->
+    <!--</ms-widget-front>-->
+  <!--</ms-widget>-->
+
+  <!--<ms-widget layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">-->
+    <!--<ms-widget-front class="white-bg">-->
+      <!--<div class="ph-8 pv-16 h-55" layout="row" layout-align="space-between center">-->
+      <!--</div>-->
+
+      <!--<div class="pt-8 pb-32" layout="column" layout-align="center center">-->
+        <!--<div class="light-blue-fg font-size-72 line-height-72">-->
+          <!--{{vm.dailyReportsSummary.value / 60 | number: 0}}-->
+        <!--</div>-->
+        <!--<div class="h3 secondary-text font-weight-500">HORAS IMPUTADAS</div>-->
+      <!--</div>-->
+
+      <!--<div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">-->
+      <!--<span class="h4 secondary-text text-truncate">Periodo actual:</span>-->
+      <!--<span class="h4 ml-8">{{vm.dailyReportsSummary.value_current_period / 60 | number: 0}} horas</span>-->
+      <!--</div>-->
+    <!--</ms-widget-front>-->
+  <!--</ms-widget>-->
+
+  <!--<ms-widget layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">-->
+    <!--<ms-widget-front class="white-bg">-->
+      <!--<div class="ph-8 pv-16 h-55" layout="row" layout-align="space-between center">-->
+      <!--</div>-->
+
+      <!--<div class="pt-8 pb-32" layout="column" layout-align="center center">-->
+        <!--<div class="light-blue-fg font-size-72 line-height-72">-->
+          <!--{{vm.numberOfEmployeesThatAssignHours}}-->
+        <!--</div>-->
+        <!--<div class="h3 secondary-text font-weight-500">EMPLEADOS</div>-->
+        <!--<div class="h5 secondary-text font-weight-500">IMPUTARON HORAS</div>-->
+      <!--</div>-->
+    <!--</ms-widget-front>-->
+  <!--</ms-widget>-->
+
+  <!--<ms-widget ng-repeat="place in vm.dailyReportsSummary.places" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">-->
+    <!--<ms-widget-front class="white-bg">-->
+      <!--<div class="ph-8 pv-16 h-55" layout="row" layout-align="space-between center">-->
+      <!--</div>-->
+
+      <!--<div class="pt-8 pb-32" layout="column" layout-align="center center">-->
+        <!--<div class="light-blue-fg font-size-72 line-height-72">-->
+          <!--{{place.value / 60 | number: 0}}-->
+        <!--</div>-->
+        <!--<div class="h3 secondary-text font-weight-500">HORAS IMPUTADAS</div>-->
+        <!--<div class="h3 secondary-text font-weight-500">EN <span class="orange-500-fg"><b>{{place.name}}</b></span></div>-->
+      <!--</div>-->
+    <!--</ms-widget-front>-->
+  <!--</ms-widget>-->
+</div>

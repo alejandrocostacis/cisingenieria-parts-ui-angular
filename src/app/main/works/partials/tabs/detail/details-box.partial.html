@@ -1,0 +1,151 @@
+
+<ms-widget layout="column" flex="100" flex-gt-sm="100">
+  <ms-widget-front class="white-bg">
+    <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+      <div class="h3"><div class="title" ><md-icon md-font-icon="icon-tooltip-text" class="icon" style="margin-right: 12px"></md-icon>Detalles</div></div>
+      <div class="pv-16">
+        <md-button ng-if="vm.role == 'UserAdmin' || vm.role == 'UserManager' || vm.role == 'UserCoordinator' || vm.role == 'UserAuxiliaryCoordinator'" class="md-icon-button" ng-click="vm.openItemDialog($event, vm.currentItem)" aria-label="update item">
+          <md-icon md-font-icon="icon-border-color"></md-icon>
+        </md-button>
+      </div>
+    </div>
+    <div class="p-16">
+      <md-list>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Nombre</b></h4>
+            <span class="md-subhead">{{vm.currentItem.name}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Activo</b></h4>
+            <span class="md-subhead">{{vm.currentItem.active? 'SI' : 'NO'}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Estado</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.work_state.active}">
+              <div class="tag" layout="row">
+                <div class="tag-color {{ vm.currentItem.work_state.color }}-bg"></div>
+                <div class="tag-label {{ vm.currentItem.work_state.color }}-fg">{{ vm.currentItem.work_state.name}}</div>
+              </div>
+              <span ng-if="!vm.currentItem.work_state.active">
+                <md-tooltip md-direction="bottom">
+                  El estado se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Cliente</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.customer.active}">
+              <div ng-if="vm.role == 'UserProjectLeader' || vm.role == 'UserAuxiliaryCoordinator'">{{vm.currentItem.customer.name}}</div>
+              <a ng-if="vm.role != 'UserProjectLeader'  || vm.role != 'UserAuxiliaryCoordinator'"
+                ui-sref="app.customers.customers.customer({id: vm.currentItem.customer.id})">{{vm.currentItem.customer.name}}</a>
+              <span ng-if="!vm.currentItem.customer.active">
+                <md-tooltip md-direction="bottom">
+                  El cliente se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Unidad económica</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.economic_unit.active}">
+              {{vm.currentItem.economic_unit.name}}
+              <span ng-if="!vm.currentItem.economic_unit.active">
+                <md-tooltip md-direction="bottom">
+                  La unidad económica se encuentra inactiva
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Empleados responsables</b></h4>
+            <ul>
+              <li ng-repeat="employee in vm.currentItem.employees">
+                <span class="md-subhead" ng-class="{'red-300-fg' : !employee.user.active}">
+
+                  <div ng-if="vm.role == 'UserProjectLeader' || vm.role == 'UserAuxiliaryCoordinator'">
+                    {{employee.employee_category.employee_position.name | capitalize: true}}: {{employee.acronym}} - {{employee.name | capitalize: true}} {{employee.lastname | capitalize: true}}
+                  </div>
+                  <a ng-if="vm.role != 'UserProjectLeader' || vm.role != 'UserAuxiliaryCoordinator'" ui-sref="app.employees.employees.employee({id: employee.id})">
+                    {{employee.employee_category.employee_position.name | capitalize: true}}: {{employee.acronym}} - {{employee.name | capitalize: true}} {{employee.lastname | capitalize: true}}
+                  </a>
+
+                  <span ng-if="!employee.user.active">
+                    <md-tooltip md-direction="bottom">
+                      El empleado {{employee.acronym}} se encuentra inactivo
+                    </md-tooltip>
+                    <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Tipo de obra</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.work_type.active}">
+              {{vm.currentItem.work_type.name}}
+              <span ng-if="!vm.currentItem.work_type.active">
+                <md-tooltip md-direction="bottom">
+                  El tipo de obra se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Grupo</b></h4>
+            <span class="md-subhead" ng-class="{'red-300-fg' : !vm.currentItem.work_group.active}">
+              {{vm.currentItem.work_group.name}}
+              <span ng-if="!vm.currentItem.work_group.active">
+                <md-tooltip md-direction="bottom">
+                  El grupo se encuentra inactivo
+                </md-tooltip>
+                <md-icon md-font-icon="icon-alert-circle" class="icon red-300-fg" style="margin-left: 12px"></md-icon>
+              </span>
+            </span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Fecha de adjudicación</b></h4>
+            <span class="md-subhead" ng-if="vm.currentItem.awarded_at != null">{{vm.currentItem.awarded_at | date: 'dd-MM-yyyy'}}</span><span ng-if="vm.currentItem.awarded_at == null">No se ha especificado una fecha</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Notas</b></h4>
+            <span class="md-subhead" ng-if="vm.currentItem.notes != null && vm.currentItem.notes != ''">{{vm.currentItem.notes}}</span><span ng-if="vm.currentItem.notes == null || vm.currentItem.notes == ''">No hay notas.</span>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+  </ms-widget-front>
+</ms-widget>

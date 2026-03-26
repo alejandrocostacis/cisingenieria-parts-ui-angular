@@ -1,0 +1,39 @@
+<md-dialog class="close-period-dialog" aria-label="dialog">
+
+  <form name="vm.form" class="md-inline-form" novalidate>
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar layout="column" class="md-accent md-warn">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title">
+          <md-icon md-font-icon="icon-lightbulb" class="icon" style="margin-right: 12px; padding-bottom: 28px"></md-icon>
+          ¿Desea cerrar el periodo <b>{{vm.period.month}} / {{vm.period.year}}?</b>
+        </span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <md-dialog-content ms-scroll>
+      ATENCIÓN: No podrá modificar las horas ya cargadas en este periodo!
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center" style="height: 12px">
+      <div layout="row" layout-align="end center">
+        <md-button type="submit" ng-click="vm.save()" class="md-accent send-button md-raised md-warn"
+          aria-label="SAVE">
+          CERRAR PERIODO
+        </md-button>
+        <md-button ng-click="vm.cancel()" class="md-accent send-button md-raised md-primary" aria-label="CANCEL">
+          CANCELAR
+        </md-button>
+      </div>
+    </md-dialog-actions>
+  </form>
+
+</md-dialog>

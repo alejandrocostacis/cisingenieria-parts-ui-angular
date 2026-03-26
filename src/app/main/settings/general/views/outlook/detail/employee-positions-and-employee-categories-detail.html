@@ -1,0 +1,44 @@
+<div class="item-header" layout="row" layout-align="space-between center">
+  <div>
+    <div class="subject" flex>{{vm.currentItem.name}}</div>
+  </div>
+  <md-button ng-if="vm.role == 'UserAdmin'" class="md-fab md-accent md-mini md-icon-button action-button" ng-click="vm.openEmployeePositionDialog($event)" aria-label="create item">
+    <md-icon md-font-icon="icon-plus"></md-icon>
+  </md-button>
+</div>
+
+<div class="item-content">
+  <div class="md-whiteframe-2dp">
+    <table class="simple" ms-responsive-table>
+      <tbody>
+      <tr ng-repeat-start="item in vm.currentItem.content.items" class="grey-100-bg">
+        <td ng-if="item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-check green-400-fg"></md-icon></td>
+        <td ng-if="!item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-remove red-200-fg"></md-icon></td>
+        <td ng-class="{'red-200-fg': !item.active, 'green-800-fg': item.active}">{{item.name}}</td>
+        <td style="text-align: right">
+          <md-button ng-if="vm.role == 'UserAdmin'" class="md-icon-button" ng-click="vm.openEmployeePositionDialog($event, item)" aria-label="update item">
+            <md-icon md-font-icon="icon-border-color"></md-icon>
+          </md-button>
+          <md-button ng-if="vm.role == 'UserAdmin'" class="md-icon-button" ng-click="vm.openEmployeeCategoryDialog($event, item.id)" aria-label="create sub-item">
+            <md-icon md-font-icon="icon-plus-circle"></md-icon>
+          </md-button>
+          <md-button ng-disabled="item.employee_categories.length == 0" class="md-icon-button" ng-click="vm.collapseAndExpandItem(item)" aria-label="collapse-expand item">
+            <md-icon ng-if="!item.expanded" md-font-icon="icon-chevron-down"></md-icon>
+            <md-icon ng-if="item.expanded" md-font-icon="icon-chevron-up"></md-icon>
+          </md-button>
+        </td>
+      </tr>
+      <tr ng-repeat-end ng-repeat="sub_item in item.employee_categories" ng-show="item.expanded">
+        <td ng-if="sub_item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-check green-400-fg"></md-icon></td>
+        <td ng-if="!sub_item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-remove red-200-fg"></md-icon></td>
+        <td ng-class="{'red-200-fg': !sub_item.active, 'green-800-fg': sub_item.active}">{{sub_item.name}}</td>
+        <td style="text-align: right">
+          <md-button ng-if="vm.role == 'UserAdmin'" class="md-icon-button" ng-click="vm.openEmployeeCategoryDialog($event, item.id, sub_item)" aria-label="update sub-item">
+            <md-icon md-font-icon="icon-border-color"></md-icon>
+          </md-button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

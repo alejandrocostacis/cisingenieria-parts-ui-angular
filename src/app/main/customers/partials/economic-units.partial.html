@@ -1,0 +1,38 @@
+
+<ms-widget layout="column" flex="100" flex-gt-sm="100">
+
+  <ms-widget-front class="white-bg">
+
+    <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+      <div class="h3"><div class="title" ><md-icon md-font-icon="icon-tooltip-text" class="icon" style="margin-right: 12px"></md-icon>Unidades Economicas</div></div>
+      <div class="pv-16">
+        <md-button ng-if="vm.role == 'UserAdmin' || vm.role == 'UserCoordinator' || vm.role == 'UserManager'" class="md-icon-button" ng-click="vm.openEconomicUnitDialog($event)" aria-label="create economic unit">
+          <md-icon md-font-icon="icon-plus"></md-icon>
+        </md-button>
+      </div>
+    </div>
+
+    <div class="p-16">
+      <div class="simple-table-container md-whiteframe-2dp">
+        <table class="simple" ms-responsive-table>
+          <tbody>
+          <tr ng-repeat="item in vm.currentItem.economic_units" class="grey-100-bg">
+            <td ng-if="item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-check green-400-fg"></md-icon></td>
+            <td ng-if="!item.active" width="40px" ><md-icon md-font-icon="icon-bookmark-remove red-200-fg"></md-icon></td>
+            <td ng-class="{'red-200-fg': !item.active, 'green-800-fg': item.active}">{{item.name}}</td>
+            <td ng-if="vm.role == 'UserAdmin' || vm.role == 'UserCoordinator' || vm.role == 'UserManager'" style="text-align: right">
+              <md-button class="md-icon-button" ng-click="vm.openEconomicUnitDialog($event, item)" aria-label="update">
+                <md-icon md-font-icon="icon-border-color"></md-icon>
+              </md-button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </ms-widget-front>
+
+</ms-widget>
+
+

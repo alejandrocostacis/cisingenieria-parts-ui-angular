@@ -1,0 +1,168 @@
+.md-raised.md-small {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  min-height: 20px;
+  vertical-align: top;
+  font-size: 10px;
+  padding: 0 0;
+  margin: 0;
+}
+
+.tag {
+  border-radius: 20px;
+  padding: 3px 4px;
+  background-color: rgba(129, 49, 49, 0.15);
+  font-weight: bold;
+  font-size: 12px;
+
+  .tag-color {
+    width: 10px;
+    height: 10px;
+    margin-top: 2px;
+    margin-right: 2px;
+    border-radius: 50%;
+  }
+}
+
+.info-box {
+  margin-bottom: 16px;
+
+  header {
+    padding: 16px;
+
+    .title {
+      font-size: 17px;
+    }
+
+    .more {
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    padding: 16px;
+    background-color: #fff;
+  }
+
+  footer {
+    padding: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+.main-layout {
+  @extend .page-layout;
+  .head {
+    padding: 24px 0;
+    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    .logo {
+      .logo-icon {
+        margin: 0 16px 0 0;
+
+        md-icon {
+          color: #ffffff;
+        }
+      }
+      .logo-text {
+        font-size: 24px;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .head-smaller {
+    padding: 12px 0;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    .logo {
+      .logo-icon {
+        margin: 0 16px 0 0;
+
+        md-icon {
+          color: #ffffff;
+        }
+      }
+      .logo-text {
+        font-size: 24px;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .list-view-toolbar {
+    @extend .toolbar;
+    position: relative;
+    padding: 8px 16px;
+
+    .view-selector {
+      .md-icon-button {
+        padding-left: 0;
+        margin: 0;
+      }
+    }
+
+    .close-item {
+      margin: 0 0 0 -8px;
+    }
+  }
+
+  .filter-list-view-toolbar {
+    @extend .toolbar;
+    position: relative;
+    padding: 8px 16px;
+    height: auto !important;
+  }
+
+  .item-list {
+    .item {
+      .cliclable {
+        cursor: pointer;
+      }
+      .icon-item {
+        width: 40px;
+      }
+      .title {
+        color: rgb(45, 50, 62);
+        font-size: 16px;
+        .item-id {
+          color: rgb(3, 155, 229);
+        }
+        .sub-title {
+          color: rgb(92, 97, 111);
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .work-state-tag {
+    border-radius: 50px;
+    margin: 8px 18px 0 0;
+    padding: 3px 8px;
+    background-color: rgba(0, 0, 0, 0.08);
+    font-weight: bold;
+
+    .tag-color {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border-radius: 50%;
+    }
+  }
+
+  .no-padding {
+    th {
+      padding: 12px 3px 12px 3px;
+      min-width: 0;
+    }
+
+    td {
+      padding: 12px 3px 12px 3px;
+    }
+  }
+}

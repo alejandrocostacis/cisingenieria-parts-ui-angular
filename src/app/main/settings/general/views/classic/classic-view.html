@@ -1,0 +1,61 @@
+<!-- TOOLBAR -->
+<div class="toolbar" layout="row" layout-align="space-between center">
+
+    <div layout="row" layout-align="start center">
+
+        <!-- SINGLE ITEM SPECIFIC ACTIONS -->
+        <md-button class="md-icon-button close-thread" aria-label="Back" ng-click="vm.closeItem()" ng-if="vm.currentItem">
+            <md-icon md-font-icon="icon-keyboard-backspace"></md-icon>
+        </md-button>
+        <!-- / SINGLE ITEM SPECIFIC ACTIONS -->
+
+    </div>
+
+    <div layout="row" layout-align="start center">
+
+        <!-- SETTINGS MENU -->
+        <md-menu class="settings-menu">
+            <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Settings">
+                <md-icon md-font-icon="icon-view-module"></md-icon>
+            </md-button>
+            <md-menu-content width="3">
+                <md-menu-item>
+                    <md-button ng-click="vm.changeView('classic')">
+                        <md-icon md-font-icon="icon-checkbox-blank-outline" ng-if="vm.currentView !== 'classic'"></md-icon>
+                        <md-icon md-font-icon="icon-checkbox-marked" class="md-accent" ng-if="vm.currentView === 'classic'"></md-icon>
+                        <span>Vista Clásica</span>
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item hide-xs>
+                    <md-button ng-click="vm.changeView('outlook')">
+                        <md-icon md-font-icon="icon-checkbox-blank-outline" ng-if="vm.currentView !== 'outlook'"></md-icon>
+                        <md-icon md-font-icon="icon-checkbox-marked" class="md-accent" ng-if="vm.currentView === 'outlook'"></md-icon>
+                        <span>Vista Outlook</span>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <!-- / SETTINGS MENU -->
+    </div>
+</div>
+<!-- / TOOLBAR -->
+
+<!-- CONTENT WRAPPER -->
+<div class="content-wrapper" layout="column" flex>
+
+    <!-- ITEM DETAIL -->
+    <div class="content item-detail"
+         ng-if="vm.currentItem"
+         ng-include="vm.currentItem.detailView.classic" ms-scroll flex>
+    </div>
+    <!-- / ITEM DETAIL -->
+
+    <!-- ITEM LIST -->
+    <div class="content item-list"
+         ng-if="!vm.currentItem"
+         ng-include="'app/main/settings/general/views/classic/list/list.html'" ms-scroll flex>
+    </div>
+    <!-- / ITEM LIST -->
+
+</div>
+<!-- / CONTENT WRAPPER -->

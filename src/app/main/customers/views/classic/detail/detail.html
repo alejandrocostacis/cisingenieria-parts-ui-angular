@@ -1,0 +1,33 @@
+<div ng-if="vm.ui.loadingCurrentItem" layout="column" layout-align="center center">
+  <md-progress-circular class="md-accent" md-mode="indeterminate" md-diameter="64"></md-progress-circular>
+  <div>Cargando cliente...</div>
+</div>
+
+<div ng-if="!vm.ui.loadingCurrentItem && vm.currentItem">
+  <div class="item-content">
+
+    <div>
+
+      <md-content>
+        <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+          <ms-widget layout="row" flex="100" flex-gt-xs="100" flex-gt-md="33">
+            <ms-widget-front class="grey-50-bg">
+              <div class="info-box" flex="100" ng-include="'app/main/customers/partials/details-box.partial.html'"></div>
+            </ms-widget-front>
+          </ms-widget>
+
+          <ms-widget layout="row" flex="100" flex-gt-xs="100" flex-gt-md="66">
+            <ms-widget-front class="grey-50-bg">
+              <div class="info-box" flex="100" ng-include="'app/main/customers/partials/economic-units.partial.html'"></div>
+            </ms-widget-front>
+          </ms-widget>
+
+        </div>
+      </md-content>
+
+    </div>
+
+  </div>
+</div>
+

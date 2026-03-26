@@ -1,0 +1,75 @@
+<div class="filter-list-view-toolbar" layout="row" layout-align="space-between center" flex>
+  <div layout="row" layout-align="space-between end" flex>
+    <form class="md-inline-form" name="form" novalidate flex>
+
+      <div layout="column" layout-gt-sm="row" layout-align="space-between start" flex>
+        <div layout="column" layout-gt-sm="row" layout-align="start start" flex>
+          <md-input-container class="md-icon-float">
+            <label>Mes</label>
+            <md-select ng-model="vm.filterForm.month" style="min-width: 128px">
+              <md-option ng-value="1">Enero</md-option>
+              <md-option ng-value="2">Febrero</md-option>
+              <md-option ng-value="3">Marzo</md-option>
+              <md-option ng-value="4">Abril</md-option>
+              <md-option ng-value="5">Mayo</md-option>
+              <md-option ng-value="6">Junio</md-option>
+              <md-option ng-value="7">Julio</md-option>
+              <md-option ng-value="8">Agosto</md-option>
+              <md-option ng-value="9">Septiembre</md-option>
+              <md-option ng-value="10">Octubre</md-option>
+              <md-option ng-value="11">Noviembre</md-option>
+              <md-option ng-value="12">Diciembre</md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>AÑO</label>
+            <input ng-model="vm.filterForm.year" type="number" min="2012" max="{{vm.current_year}}">
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>EMPLEADO</label>
+            <md-select required="true" ng-model="vm.filterForm.personnel_file" style="min-width: 220px">
+              <md-option ng-class="{'red-500-fg': !employee.user.active}" ng-repeat="employee in vm.employees" ng-value="employee.personnel_file">
+                {{employee.personnel_file}} - {{employee.lastname}}, {{employee.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-icon-float">
+            <label>Legajo</label>
+            <input ng-model="vm.filterForm.personnel_file" type="text">
+          </md-input-container>
+
+          <div class="buttons" ng-if="vm.filterForm.year && vm.filterForm.personnel_file && ['UserAdmin', 'UserHumanResourceManager'].includes(vm.role)">
+            <md-button class="md-accent md-raised" ng-click="vm.openClosePeriodDialog($event, true)">
+              Abrir Periodo
+            </md-button>
+            <md-button class="md-warn md-raised" ng-click="vm.openClosePeriodDialog($event, false)">
+              Cerrar Periodo
+            </md-button>
+          </div>
+          <!-- <md-input-container class="md-icon-float">
+            <label>ACTIVO</label>
+            <md-select ng-model="vm.filterForm.active" style="min-width: 128px">
+              <md-option ng-value="-1">
+                <b>TODOS</b>
+              </md-option>
+              <md-option ng-value="1">
+                <b>SI</b>
+              </md-option>
+              <md-option ng-value="0">
+                <b>NO</b>
+              </md-option>
+            </md-select>
+          </md-input-container> -->
+        </div>
+        <md-dialog-actions>
+          <md-button class="send-button md-raised" ng-click="vm.searchClick()" ng-disabled="form.$invalid" type="submit" aria-label="BUSCAR">
+            BUSCAR
+          </md-button>
+        </md-dialog-actions>
+      </div>
+    </form>
+  </div>
+</div>

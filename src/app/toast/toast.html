@@ -1,0 +1,7 @@
+<md-toast>
+  <md-icon md-font-icon="{{icon}}" class="icon" ng-class="{'grey-100-fg': icon_type == 'info', 'red-400-fg': icon_type == 'error'}" style="margin-right: 12px"></md-icon>
+  <span class="md-toast-text" ng-class="{'red-400-fg': icon_type == 'error'}" flex>{{content}}</span>
+  <md-button ng-click="closeToast()">
+    Cerrar
+  </md-button>
+</md-toast>

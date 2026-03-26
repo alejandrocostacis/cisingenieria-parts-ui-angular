@@ -1,0 +1,24 @@
+<div class="page-layout carded fullwidth main-layout" layout="row">
+
+  <div class="top-bg md-accent-bg"></div>
+
+  <div class="center" layout="column" flex>
+
+    <div ng-include="'app/main/reports/daily_reports_per_work/partials/head/head.partial.html'"></div>
+
+    <div class="content-card" layout="column" flex>
+
+      <div layout="column" layout-align="start space-between fullheight" flex="auto">
+        <div ng-if="!vm.ui.loadingCurrentItem"
+          ng-include="'app/main/reports/daily_reports_per_work/partials/toolbar/toolbar.partial.html'"></div>
+        <div ng-if="!vm.ui.loadingCurrentItem" style="padding-top: 24px" class="md-background-bg md-hue-3 secondary-text"
+          ng-include="'app/main/reports/daily_reports_per_work/partials/filter_toolbar/filter-toolbar.partial.html'"></div>
+
+        <div class="fullpage-datatable" layout="column" flex ng-include="'app/main/reports/daily_reports_per_work/partials/list.html'"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="head-smaller" layout="row" layout-align="space-between center">
+
+  <div class="logo" layout="row" layout-align="start center">
+    <span class="logo-icon">
+      <md-icon md-font-icon="icon-file-document" class="icon"></md-icon>
+    </span>
+    <span class="logo-text">Reporte Acumulados</span>
+  </div>
+
+  <div>
+    <md-button class="md-primary md-raised" aria-label="Exportar a XLS" ng-click="vm.openXLSExportDialog($event, 'money')">
+      Acum $ -> XLS
+    </md-button>
+    <md-button class="md-primary md-raised" aria-label="Exportar a XLS" ng-click="vm.openXLSExportDialog($event, 'hours')">
+      Acum HS. -> XLS
+    </md-button>
+  </div>
+
+</div>

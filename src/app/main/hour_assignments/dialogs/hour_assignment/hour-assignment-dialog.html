@@ -1,0 +1,113 @@
+<md-dialog class="hour-assignment-dialog" aria-label="dialog">
+
+  <form name="vm.form" class="md-inline-form" novalidate>
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar layout="column" class="md-accent">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title"><md-icon md-font-icon="icon-cog" class="icon" style="margin-right: 12px; padding-bottom: 28px"></md-icon>Imputar Horas</span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <md-dialog-content ms-scroll>
+
+      <md-input-container flex required="true">
+        <label>Horas y minutos</label>
+        <input type='text' data-ng-model="vm.clock.value" data-lng-clockpicker data-lng-clockpicker-options="vm.clock.options" aria-label="clock">
+      </md-input-container>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container class="md-icon-float md-block" flex>
+          <label>Obra</label>
+          <md-autocomplete
+            required="true"
+            md-no-cache="true"
+            md-selected-item="vm.inputForm.work.selected"
+            md-search-text="vm.inputForm.work.searchText"
+            md-items="work in vm.filterWorks(vm.inputForm.work.searchText)"
+            md-item-text="vm.getWorkDisplayName(work)"
+            md-min-length="0"
+            ng-disabled="vm.worksLoading"
+            style="margin-bottom: 32px">
+            <md-item-template>
+              <span ng-class="{'red-500-fg': !work.active}" md-highlight-text="vm.inputForm.work.searchText" md-highlight-flags="^i"># {{work.id}} - {{work.name}}</span>
+            </md-item-template>
+            <md-not-found>
+              No se han encontrado obras.
+            </md-not-found>
+          </md-autocomplete>
+        </md-input-container>
+        <md-progress-circular ng-show="vm.worksLoading" class="md-accent" md-mode="indeterminate" md-diameter="64" style="margin-top: 6px"></md-progress-circular>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Lugar</label>
+          <md-select required="true" ng-model="vm.item.place.id" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !place.active}" ng-repeat="place in vm.places" ng-value="place.id">
+              {{place.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Actividad</label>
+          <md-select required="true" ng-model="vm.item.activity.id" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !activity.active}" ng-repeat="activity in vm.activities" ng-value="activity.id">
+              {{activity.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Area</label>
+          <md-select required="true" ng-model="vm.item.speciality.employee_area.id" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !employeeArea.active}" ng-repeat="employeeArea in vm.employeeAreas" ng-value="employeeArea.id">
+              {{employeeArea.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Especialidad</label>
+          <md-select required="true" ng-model="vm.item.speciality.id"  ng-disabled="vm.item.speciality.employee_area.id == 0" style="min-width: 128px">
+            <md-option ng-class="{'red-500-fg': !speciality.active}" ng-repeat="speciality in vm.specialities" ng-value="speciality.id">
+              {{speciality.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+      <md-input-container class="md-icon-float md-block">
+        <label>Observaciones</label>
+        <input ng-model="vm.item.observations" type="text">
+      </md-input-container>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center" style="height: 12px">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.save()" class="md-accent send-button md-raised" aria-label="SAVE"
+          ng-disabled="vm.ui.loading || vm.form.$invalid || vm.form.$pristine || !vm.areHoursAndMinutesValid()">
+          IMPUTAR
+        </md-button>
+      </div>
+      <div layout="row" layout-align="start center">
+        <md-button ng-if="!vm.new" class="md-icon-button md-warn" aria-label="delete" ng-click="vm.remove()">
+          <md-icon md-font-icon="icon-delete"></md-icon>
+          <md-tooltip><span>Eliminar definitivamente</span></md-tooltip>
+        </md-button>
+      </div>
+    </md-dialog-actions>
+  </form>
+
+</md-dialog>

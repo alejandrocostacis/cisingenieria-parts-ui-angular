@@ -1,0 +1,10 @@
+<div class="page-layout carded fullwidth main-layout" layout="row">
+  <div class="center" layout="column" flex>
+    <div class="content-card" layout="column" flex>
+      <div layout="column" layout-align="start space-between fullheight" flex="auto">
+        <div class="md-background-bg md-hue-3 secondary-text" ng-if="!vm.ui.loadingCurrentItem" ng-include="'app/main/works/partials/tabs/hours_by_spec/partials/filter-toolbar.partial.html'" style="padding-top: 24px"></div>
+        <div class="fullpage-datatable" ng-include="'app/main/works/partials/tabs/hours_by_spec/partials/list.html'" layout="column" flex></div>
+      </div>
+    </div>
+  </div>
+</div>

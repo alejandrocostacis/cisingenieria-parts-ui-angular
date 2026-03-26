@@ -1,0 +1,49 @@
+<div layout="row" layout-align="end center">
+  <md-content class="md-padding">
+    <span class="tag md-subhead">Mostrando {{vm.items.length}} resultados de {{vm.items_total_count}}</span>
+</div>
+</div>
+
+<md-whiteframe class="md-whiteframe-1dp" layout layout-align="start start" flex>
+  <div flex="100">
+    <table class="simple item-list clickable" ms-responsive-table ng-if="!vm.ui.loadingItems">
+      <tbody>
+        <tr ng-repeat="item in vm.items | filter: vm.quickFilter" ng-click="vm.openItem(item.id)"
+          class="item" ng-class="{'md-background-bg md-hue-3 secondary-text': vm.currentItem.id == item.id}">
+          <td class="icon-item">
+            <md-icon md-font-icon="icon-folder"></md-icon>
+          </td>
+          <td>
+            <div class="title" flex layout="column">
+              <span ng-class="{'red-500-fg': !item.active}">
+                <span class="item-id"># {{item.id}}</span>&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}
+              </span>
+
+              <div class="sub-title" layout='row' layout-align='space-between'>
+                <div layout='row' layout-gt-md='column' layout-align="center start">
+                  Cli.: {{item.customer.name}}
+                </div>
+                <div layout='row' layout-gt-md='column' layout-align="center start">
+                  <ul>
+                    <li ng-repeat="employee in item.employees">
+                      {{employee.employee_category.employee_position.name | capitalize: true}}: {{employee.acronym}} - {{employee.name | capitalize: true}} {{employee.lastname | capitalize: true}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td style="text-align: right">
+            <span ng-if="!item.has_work_quotations" class="green-800-fg">Sin Cotizar</span>
+          </td>
+          <td width="200px" style="text-align: right">
+            <div class="work-state-tag" layout="row">
+              <div class="tag-color {{ item.work_state.color }}-bg"></div>
+              <div class="tag-label {{ item.work_state.color }}-fg">{{ item.work_state.name }}</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</md-whiteframe>

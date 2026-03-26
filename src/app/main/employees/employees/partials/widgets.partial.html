@@ -1,0 +1,45 @@
+<div ng-if="vm.loadingWidgets" layout="row" layout-align="center center">
+  <md-progress-circular flex class="md-accent" md-mode="indeterminate" md-diameter="72"></md-progress-circular>
+</div>
+
+<div ng-if="!vm.loadingWidgets" class="widget-group" layout="row" flex="100" layout-wrap>
+  <ms-widget layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+    <ms-widget-front class="white-bg">
+      <div class="ph-8 pv-16 h-55" layout="row" layout-align="space-between center">
+      </div>
+
+      <div class="pt-8 pb-32" layout="column" layout-align="center center">
+        <div class="light-blue-fg font-size-72 line-height-72">
+          {{vm.currentItem.additionalInfo.sum_daily_reports_minutes / 60 | number: 0}}
+        </div>
+        <div class="h3 secondary-text font-weight-500">HORAS</div>
+        <div class="h3 secondary-text font-weight-500">IMPUTADAS</div>
+      </div>
+
+      <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
+        <span class="h4 secondary-text text-truncate">Periodo actual:</span>
+        <span class="h4 ml-8">{{vm.currentItem.additionalInfo.sum_daily_reports_cp / 60 | number: 0}} horas</span>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+
+  <ms-widget layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+    <ms-widget-front class="white-bg">
+      <div class="ph-8 pv-16 h-55" layout="row" layout-align="space-between center">
+      </div>
+
+      <div class="pt-8 pb-32" layout="column" layout-align="center center">
+        <div class="light-blue-fg font-size-72 line-height-72">
+          {{vm.currentItem.additionalInfo.count_works}}
+        </div>
+        <div class="h3 secondary-text font-weight-500">OBRAS</div>
+        <div class="h5 secondary-text font-weight-500">TRABAJADAS</div>
+      </div>
+
+      <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
+        <span class="h4 secondary-text text-truncate">Periodo actual:</span>
+        <span class="h4 ml-8">{{vm.currentItem.additionalInfo.count_works_cp}} horas</span>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+</div>

@@ -1,0 +1,146 @@
+<div class="page-layout carded left-sidenav" id="layout_employee_costs" layout="row">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg md-accent-bg"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center" layout="column" flex>
+
+    <!-- CONTENT HEADER -->
+    <div class="header" layout="row" layout-align="space-between center">
+      <div class="logo" layout="row" layout-align="start center">
+        <span class="logo-icon">
+          <md-icon class="icon" md-font-icon="icon-cash-usd"></md-icon>
+        </span>
+        <span class="logo-text">Costos</span>
+      </div>
+      <md-button class="md-primary md-raised" aria-label="Exportar a XLS" ng-click="vm.openXLSExportDialog($event)">
+        Exportar a XLS
+      </md-button>
+    </div>
+    <!-- / CONTENT HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card" layout="column" flex>
+      <!-- TOOLBAR -->
+      <div class="toolbar" layout="row" layout-align="space-between center">
+
+        <div layout="row" layout-align="start center">
+
+          <div class="search-wrapper" layout="row" layout-align="start center" flex style="width: 600px; height: 40px">
+            <div class="search" id="search" flex layout="row" layout-align="start center">
+              <md-icon class="icon s24" md-font-icon="icon-magnify"></md-icon>
+              <input id="searchEmployeesInput" ng-model="vm.search" type="text" flex placeholder="FILTRO RAPIDO">
+            </div>
+          </div>
+
+        </div>
+
+        <div layout="row" layout-align="start center">
+          <md-input-container class="md-icon-float">
+            <label>ACTIVO</label>
+            <md-select ng-model="vm.active" style="min-width: 128px">
+              <md-option ng-value="-1">
+                <b>TODOS</b>
+              </md-option>
+              <md-option ng-value="1">
+                <b>SI</b>
+              </md-option>
+              <md-option ng-value="0">
+                <b>NO</b>
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
+      <!-- / TOOLBAR -->
+
+      <!-- CONTENT WRAPPER -->
+      <div class="loading-items" ng-if="vm.loadingEmployees" layout="column" layout-align="center center">
+        <md-progress-circular class="md-accent" md-mode="indeterminate" md-diameter="64"></md-progress-circular>
+        <div>Cargando empleados...</div>
+      </div>
+
+      <div class="content-wrapper" ng-if="!vm.loadingEmployees" layout="column" flex>
+
+        <!-- ITEM LIST -->
+        <div class="content item-list scrollable" ms-scroll flex>
+
+          <div class="simple-table-container">
+            <table class="simple" ms-responsive-table>
+              <tbody>
+                <tr class="grey-50-bg">
+                  <th style="padding-left: 22px">
+                    <md-icon class="icon s22" md-font-icon="icon-account-multiple" style="display: flex;float: left"></md-icon>
+                    <span style="display: flex;float: left; padding-left: 12px;padding-top: 3px">EMPLEADO</span>
+                  </th>
+                  <th>
+                    <md-button class="md-icon-button" ng-click="vm.addPeriodLeft()" ng-disabled="vm.fetchingPeriod || vm.editEnabled" aria-label="decrement by month">
+                      <md-tooltip md-direction="top">anterior mes</md-tooltip>
+                      <md-icon md-font-icon="icon-chevron-left"></md-icon>
+                    </md-button>
+                  </th>
+                  <th ng-repeat="period in vm.periods | slice:2:6" style="text-align: center;" width="200px" max-width="200px" min-width="200px">
+                    <md-switch class="md-accent" ng-change="vm.savePeriod(period)" ng-disabled="vm.editEnabled && !period.editEnabled"
+                      ng-if="['UserAdmin','UserManager','UserCoordinator','UserHumanResourceManager'].includes(vm.role) && !period.savingPeriod"
+                      ng-model="period.editEnabled" style="margin-left: 12px">
+                      <span ng-class="{'blue-500-fg': period.period_month == vm.today.period_month && period.period_year == vm.today.period_year, 'red-500-fg': !vm.dateLessOrEquals(period, vm.today)}"
+                        >{{ period.display }}</span>
+                    </md-switch>
+                    <span ng-class="{'blue-500-fg': period.period_month == vm.today.period_month && period.period_year == vm.today.period_year, 'red-500-fg': !vm.dateLessOrEquals(period, vm.today)}"
+                      ng-if="!['UserAdmin','UserManager','UserCoordinator','UserHumanResourceManager'].includes(vm.role)">{{ period.display }}</span>
+
+                    <md-progress-circular class="md-accent" ng-if="period.savingPeriod" style="float: right; display: flex"
+                      flex md-mode="indeterminate" md-diameter="64"></md-progress-circular>
+                  </th>
+                  <th>
+                    <md-button class="md-icon-button" ng-click="vm.addPeriodRight()" ng-disabled="vm.fetchingPeriod || vm.editEnabled" aria-label="increment by month">
+                      <md-tooltip md-direction="top">siguiente mes</md-tooltip>
+                      <md-icon md-font-icon="icon-chevron-right"></md-icon>
+                    </md-button>
+                  </th>
+                </tr>
+                <tr ng-if="employee.active && vm.active == 1 || !employee.active && vm.active == 0 || vm.active == -1"
+                  ng-repeat="employee in vm.employees | filter: vm.search">
+                  <td>
+                    <div layout="row" layout-align="start center">
+                      <span ng-class="{'red-500-fg': !employee.active}">{{ employee.acronym }} - {{ employee.name }}, {{ employee.lastname }}</span>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td ng-repeat="employee_cost in employee.employee_costs | slice:2:6">
+                    <div class="md-whiteframe-1dp padding-5 blue-100-bg margin-left-45"
+                      ng-class="{'md-whiteframe-24dp blue-500-bg grey-50-fg': employee_cost.cost != employee_cost.cost_backup}"
+                      ng-if="vm.periods[$index+2].editEnabled"
+                      flex-sm="55" flex-gt-sm="45" flex-gt-md="35" layout="row" layout-align="center center">
+                      <input class="text-center font-size-16 blue-100-bg"
+                        ng-class="{'blue-500-bg grey-50-fg': employee_cost.cost != employee_cost.cost_backup}"
+                        ng-model="employee_cost.cost" type="number" style="border: 0" min="0">
+                    </div>
+                    <div class="md-whiteframe-1dp padding-5 margin-left-45"
+                      ng-if="!vm.periods[$index+2].editEnabled && employee_cost.cost != 0"
+                      flex-sm="65" flex-gt-sm="55" flex-gt-md="45" layout="row" layout-align="center center">
+                      <div class="text-center font-size-16">{{ employee_cost.cost }}</div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+        <!-- / ITEM LIST -->
+
+      </div>
+      <!-- / CONTENT WRAPPER -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

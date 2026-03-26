@@ -1,0 +1,8 @@
+<div class="main-layout carded left-sidenav" layout="row">
+  <div class="top-bg md-accent-bg"></div>
+  <div class="center" layout="column" flex>
+    <div ng-include="'app/main/works/partials/head/head.partial.html'"></div>
+    <div class="content-card" ng-class="vm.currentView.name" layout="column" flex
+      ng-if="vm.currentView" ng-include="vm.currentView.url"></div>
+  </div>
+</div>

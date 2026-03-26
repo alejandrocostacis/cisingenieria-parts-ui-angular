@@ -1,0 +1,42 @@
+<md-dialog class="first-sign-in-dialog" aria-label="dialog">
+
+  <form name="form" class="md-inline-form" novalidate>
+    <!-- DIALOG TOOLBAR -->
+    <md-toolbar layout="column" class="md-accent">
+
+      <!-- TOOLBAR TOP -->
+      <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+        <span class="title"><md-icon md-font-icon="icon-key-variant" class="icon" style="margin-right: 12px; padding-bottom: 28px"></md-icon>Cambiar Contraseña</span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="close dialog">
+          <md-icon md-font-icon="icon-close"></md-icon>
+        </md-button>
+      </div>
+      <!-- / TOOLBAR TOP -->
+
+    </md-toolbar>
+    <!-- / DIALOG TOOLBAR -->
+
+    <md-dialog-content ms-scroll>
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Contraseña</label>
+          <input ng-model="vm.password" type="password" ng-required="vm.new" md-maxlength="64">
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Repetir contraseña</label>
+          <input ng-model="vm.form.repeatPassword" type="password" ng-required="vm.password" ng-disabled="!vm.password" data-match="vm.password" md-maxlength="64">
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center" style="height: 12px">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.save()" class="send-button md-raised md-accent" ng-disabled="form.$invalid || form.$pristine" aria-label="SAVE">
+          GUARDAR
+        </md-button>
+      </div>
+    </md-dialog-actions>
+  </form>
+
+</md-dialog>

@@ -1,0 +1,86 @@
+<md-dialog class="work-quotation-dialog" aria-label="dialog">
+
+  <form name="form" class="md-inline-form" novalidate>
+    <md-toolbar class="md-accent md-tall" layout="column">
+      <md-toolbar class="md-accent" layout="column">
+        <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between">
+          <span class="title"><md-icon md-font-icon="icon-blur" class="icon" style="margin-right: 12px; padding-bottom: 28px"></md-icon>Cotizacion</span>
+          <md-button class="md-icon-button" ng-click="vm.cancel()" aria-label="Close dialog">
+            <md-icon md-font-icon="icon-close"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+    </md-toolbar>
+
+    <md-dialog-content ms-scroll>
+      <div md-whiteframe="1" ng-if="vm.new">
+        <md-content layout-padding class="grey-50-bg" ng-hide="vm.employeeAreas.length == 0">
+          <div layout="column" layout-gt-sm="row">
+            <md-input-container flex>
+              <label>Area</label>
+              <md-select ng-model="vm.inputWorkQuotationSpeciality.employee_area" required="true" style="min-width: 128px">
+                <md-option ng-repeat="employeeArea in vm.employeeAreas" ng-value="employeeArea">
+                  {{ employeeArea.name }}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Especialidad</label>
+              <md-select ng-model="vm.inputWorkQuotationSpeciality.speciality" required="true" style="min-width: 128px">
+                <md-option ng-repeat="speciality in vm.inputWorkQuotationSpeciality.employee_area.specialities" ng-value="speciality">
+                  {{ speciality.name }}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Horas</label>
+              <input ng-model="vm.inputWorkQuotationSpeciality.hours" type="number" step="1" min="{{vm.minHours}}" required>
+            </md-input-container>
+            <md-button class="md-fab md-primary md-mini md-icon-button action-button" ng-click="vm.addWorkQuotationSpeciality()" style="margin-top: 12px" ng-disabled="vm.inputWorkQuotationSpeciality.employee_area == null || vm.inputWorkQuotationSpeciality.hours == 0" aria-label="add">
+              <md-icon md-font-icon="icon-plus"></md-icon>
+            </md-button>
+          </div>
+        </md-content>
+
+        <md-divider></md-divider>
+
+        <table class="simple" ms-responsive-table>
+          <tbody>
+            <tr ng-repeat="workQuotationSpeciality in vm.selectedWorkQuotationSpecialites">
+              <td ng-class="{'red-500-fg': workQuotationSpeciality.hours < 0, 'green-800-fg': workQuotationSpeciality.hours >= 0}">{{ workQuotationSpeciality.employee_area.name }}</td>
+              <td ng-class="{'red-500-fg': workQuotationSpeciality.hours < 0, 'green-800-fg': workQuotationSpeciality.hours >= 0}">{{ workQuotationSpeciality.speciality.name }}</td>
+              <td ng-class="{'red-500-fg': workQuotationSpeciality.hours < 0, 'green-800-fg': workQuotationSpeciality.hours >= 0}" style="text-align: right">{{ workQuotationSpeciality.hours }} horas</td>
+              <td style="text-align: right" width="40px">
+                <md-button class="md-icon-button" ng-click="vm.removeWorkQuotationSpeciality(workQuotationSpeciality)" aria-label="remove">
+                  <md-icon md-font-icon="icon-cancel"></md-icon>
+                </md-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <md-input-container class="md-block">
+        <label>Observaciones</label>
+        <textarea ng-model="vm.item.observations" md-maxlength="255" rows="3" md-select-on-focus></textarea>
+      </md-input-container>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="space-between center">
+      <div layout="row" layout-align="start center">
+        <md-button type="submit" ng-click="vm.save()" class="send-button md-accent md-raised" ng-disabled="(vm.new && vm.selectedWorkQuotationSpecialites == 0) || form.$invalid" aria-label="SAVE">
+          GUARDAR
+        </md-button>
+      </div>
+
+      <div layout="row" ng-if="!vm.new">
+        <md-button class="md-icon-button md-warn" aria-label="Delete" ng-click="vm.remove()">
+          <md-icon md-font-icon="icon-delete"></md-icon>
+          <md-tooltip><span>Eliminar definitivamente</span></md-tooltip>
+        </md-button>
+      </div>
+    </md-dialog-actions>
+
+  </form>
+
+</md-dialog>

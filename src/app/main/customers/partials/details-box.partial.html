@@ -1,0 +1,38 @@
+
+<ms-widget layout="column" flex="100" flex-gt-sm="100">
+
+  <ms-widget-front class="white-bg">
+
+    <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+      <div class="h3"><div class="title" ><md-icon md-font-icon="icon-tooltip-text" class="icon" style="margin-right: 12px"></md-icon>Detalles</div></div>
+      <div class="pv-16">
+        <md-button ng-if="vm.role == 'UserAdmin' || vm.role == 'UserCoordinator' || vm.role == 'UserManager'" class="md-icon-button" ng-click="vm.openItemDialog($event, vm.currentItem)" aria-label="update item">
+          <md-icon md-font-icon="icon-border-color"></md-icon>
+        </md-button>
+      </div>
+    </div>
+
+    <div class="p-16">
+      <md-list>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Nombre</b></h4>
+            <span class="md-subhead">{{vm.currentItem.name}}</span>
+          </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+          <md-icon md-font-icon="icon-blur" class="icon grey-400-fg"></md-icon>
+          <div class="md-list-item-text">
+            <h4><b>Activo</b></h4>
+            <span class="md-subhead">{{vm.currentItem.active? 'SI' : 'NO'}}</span>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+
+  </ms-widget-front>
+
+</ms-widget>
+
+

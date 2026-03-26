@@ -1,0 +1,131 @@
+<div
+  class="content fullpage-datatable no-padding scrollable"
+  layout="column"
+  flex
+  ms-scroll
+>
+  <table class="simple" ms-responsive-table>
+    <tbody>
+      <tr ng-repeat-start="item in vm.items" class="grey-100-bg">
+        <td width="40px"><md-icon md-font-icon="icon-calendar"></md-icon></td>
+        <td>
+          <div class="info" flex layout="column">
+            <span class="font-size-16">{{item.date | date: 'dd-MM-yyyy'}}</span>
+            <span class="font-size-16 text-capitalize"
+              >{{item.date | date: 'EEEE'}}</span
+            >
+
+            <!--<div class="message text-truncate">-->
+            <!--<div layout="column" layout-align="center start">-->
+            <!--{{item.minutes_parsed.hours}} horas<span ng-hide="item.minutes_parsed.minutes == 0"> y {{item.minutes_parsed.minutes}} minutos</span>-->
+            <!--</div>-->
+            <!--</div>-->
+          </div>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align: right">
+          <span class="text-boxed"
+            >{{item.value_parsed.hours}} horas<span
+              ng-hide="item.value_parsed.minutes == 0"
+            >
+              y {{item.value_parsed.minutes}} minutos</span
+            >
+            imputadas</span
+          >
+        </td>
+        <td width="140px" style="text-align: right">
+          <md-button
+            ng-disabled="item.daily_reports.length == 0"
+            class="md-icon-button"
+            ng-click="vm.collapseAndExpandDate(item)"
+            aria-label="collapse-expand date"
+          >
+            <md-icon
+              ng-if="!item.expanded"
+              md-font-icon="icon-chevron-down"
+            ></md-icon>
+            <md-icon
+              ng-if="item.expanded"
+              md-font-icon="icon-chevron-up"
+            ></md-icon>
+          </md-button>
+        </td>
+      </tr>
+      <tr
+        ng-repeat-end
+        ng-repeat="report in item.daily_reports"
+        ng-show="item.expanded"
+      >
+        <td width="40px"><md-icon md-font-icon="icon-clock"></md-icon></td>
+        <td>{{report.work.id}} - {{report.work.name}}</td>
+        <td>
+          <div class="info" flex layout="column">
+            <span class="grey-500-fg"><strong>Lugar</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{report.place.name}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="info" flex layout="column">
+            <span class="grey-500-fg"><strong>Actividad</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{report.activity.name}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="info" flex layout="column">
+            <span class="grey-500-fg"><strong>Area</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{report.speciality.employee_area.name}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="info" flex layout="column">
+            <span class="grey-500-fg"><strong>Especialidad</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{report.speciality.name}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div
+            class="info"
+            flex
+            layout="column"
+            ng-if="report.observations != ''"
+          >
+            <span class="grey-500-fg"><strong>Observaciones</strong></span>
+            <div class="message text-truncate">
+              <div layout="column" layout-align="center start">
+                {{report.observations}}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td style="text-align: right">
+          {{report.minutes_parsed.hours}} horas<span
+            ng-hide="report.minutes_parsed.minutes == 0"
+          >
+            y {{report.minutes_parsed.minutes}} minutos</span
+          >
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

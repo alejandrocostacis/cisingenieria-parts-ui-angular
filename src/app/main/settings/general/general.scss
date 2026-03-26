@@ -1,0 +1,26 @@
+#layout_general {
+  .center {
+    .header {
+      padding: 24px 0;
+      height: 100px;
+      min-height: 100px;
+      max-height: 100px;
+      .logo {
+        .logo-icon {
+          margin: 0 16px 0 0;
+
+          md-icon {
+            color: #FFFFFF;
+          }
+        }
+        .logo-text {
+          font-size: 24px;
+          color: #FFFFFF;
+        }
+      }
+    }
+    .content-card {
+
+    }
+  }
+}
