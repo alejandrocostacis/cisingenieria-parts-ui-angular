@@ -27,6 +27,13 @@
                     display: none;
                 }
             }
+
+            &:not(.collapsed) {
+                > ul {
+                    display: block !important;
+                    height: auto !important;
+                }
+            }
         }
     }
 
@@ -62,25 +69,15 @@
                 white-space: nowrap;
                 overflow: hidden;
 
+                &, span, .icon {
+                    color: rgba(255, 255, 255, 0.70) !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    transition: opacity 0.25s ease-in-out 0.1s, color 0.1s ease-in-out;
+                }
+
                 .icon {
-                    color: rgba(255, 255, 255, 0.7);
                     margin: 0 16px 0 0;
-                }
-
-                // Non-link
-                span {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    opacity: 1;
-                    transition: opacity 0.25s ease-in-out 0.1s;
-                }
-
-                // Link
-                a {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    opacity: 1;
-                    transition: opacity 0.25s ease-in-out 0.1s;
                 }
 
                 // Arrow

@@ -6,7 +6,7 @@ var path = require('path'),
   gulpNgConfig = require('gulp-ng-config');
 
 gulp.task('env:development', function () {
-  gulp.src(path.join(conf.paths.src, '/app/environments.json'))
+  return gulp.src(path.join(conf.paths.src, '/app/environments.json'))
     .pipe(gulpNgConfig('environments.config', {
       environment: 'development'
     }))
@@ -14,7 +14,7 @@ gulp.task('env:development', function () {
 });
 
 gulp.task('env:production', function () {
-  gulp.src(path.join(conf.paths.src, '/app/environments.json'))
+  return gulp.src(path.join(conf.paths.src, '/app/environments.json'))
     .pipe(gulpNgConfig('environments.config', {
       environment: 'production'
     }))
@@ -22,7 +22,7 @@ gulp.task('env:production', function () {
 });
 
 gulp.task('env:uat', function () {
-  gulp.src(path.join(conf.paths.src, '/app/environments.json'))
+  return gulp.src(path.join(conf.paths.src, '/app/environments.json'))
     .pipe(gulpNgConfig('environments.config', {
       environment: 'uat'
     }))

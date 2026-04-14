@@ -13,11 +13,7 @@ gulp.task('partials', function () {
     path.join(conf.paths.src, '/app/**/*.html'),
     path.join(conf.paths.tmp, '/serve/app/**/*.html')
   ])
-    .pipe($.htmlmin({
-      collapseWhitespace: true,
-      maxLineLength: 120,
-      removeComments: true
-    }))
+    // Disabled htmlmin to prevent destruction of angular templates
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: 'uiPartsApp',
       root: 'app'
@@ -55,11 +51,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(cssFilter.restore)
     .pipe($.revReplace())
     .pipe(htmlFilter)
-    .pipe($.htmlmin({
-      collapseWhitespace: true,
-      maxLineLength: 120,
-      removeComments: true
-    }))
+    // Disabled htmlmin
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
     .pipe($.size({
